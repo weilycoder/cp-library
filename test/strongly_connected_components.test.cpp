@@ -21,9 +21,9 @@ int main() {
   graph.solve();
 
   cout << graph.sccs.size() << '\n';
-  for (const auto &ecc : graph.sccs) {
-    cout << ecc.size();
-    for (size_t u : ecc)
+  for (const auto &scc : graph.sccs) {
+    cout << scc.size();
+    for (size_t u : scc)
       cout << ' ' << u;
     cout << '\n';
   }
