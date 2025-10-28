@@ -69,8 +69,8 @@ data:
     \ | cin.badbit);\n  size_t n, m;\n  cin >> n >> m;\n\n  StrongConnectedComponents\
     \ graph(n);\n  for (size_t i = 0; i < m; ++i) {\n    size_t u, v;\n    cin >>\
     \ u >> v;\n    graph.add_edge(u, v);\n  }\n\n  graph.solve();\n\n  cout << graph.sccs.size()\
-    \ << '\\n';\n  for (const auto &ecc : graph.sccs) {\n    cout << ecc.size();\n\
-    \    for (size_t u : ecc)\n      cout << ' ' << u;\n    cout << '\\n';\n  }\n\
+    \ << '\\n';\n  for (const auto &scc : graph.sccs) {\n    cout << scc.size();\n\
+    \    for (size_t u : scc)\n      cout << ' ' << u;\n    cout << '\\n';\n  }\n\
     \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n\n#include \"../weilycoder/graph/tarjan.hpp\"\
     \n#include <iostream>\nusing namespace std;\nusing namespace weilycoder;\n\nint\
@@ -78,15 +78,15 @@ data:
     \ | cin.badbit);\n  size_t n, m;\n  cin >> n >> m;\n\n  StrongConnectedComponents\
     \ graph(n);\n  for (size_t i = 0; i < m; ++i) {\n    size_t u, v;\n    cin >>\
     \ u >> v;\n    graph.add_edge(u, v);\n  }\n\n  graph.solve();\n\n  cout << graph.sccs.size()\
-    \ << '\\n';\n  for (const auto &ecc : graph.sccs) {\n    cout << ecc.size();\n\
-    \    for (size_t u : ecc)\n      cout << ' ' << u;\n    cout << '\\n';\n  }\n\
+    \ << '\\n';\n  for (const auto &scc : graph.sccs) {\n    cout << scc.size();\n\
+    \    for (size_t u : scc)\n      cout << ' ' << u;\n    cout << '\\n';\n  }\n\
     \  return 0;\n}\n"
   dependsOn:
   - weilycoder/graph/tarjan.hpp
   isVerificationFile: true
   path: test/strongly_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2025-10-28 22:39:45+08:00'
+  timestamp: '2025-10-28 22:53:17+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/strongly_connected_components.test.cpp

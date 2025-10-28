@@ -11,7 +11,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"weilycoder/unionfind.hpp\"\n\n\n\n#include <algorithm>\n\
+  bundledCode: "#line 1 \"weilycoder/data-struct/unionfind.hpp\"\n\n\n\n#include <algorithm>\n\
     #include <numeric>\n#include <vector>\n\nnamespace weilycoder {\ntemplate <typename\
     \ ptr_t = size_t> struct UnionFind {\n  std::vector<ptr_t> parent, size;\n\n \
     \ UnionFind(ptr_t n) : parent(n), size(n, 1) {\n    std::iota(parent.begin(),\
@@ -33,16 +33,16 @@ data:
     \n#endif\n"
   dependsOn: []
   isVerificationFile: false
-  path: weilycoder/unionfind.hpp
+  path: weilycoder/data-struct/unionfind.hpp
   requiredBy: []
-  timestamp: '2025-10-28 22:39:45+08:00'
+  timestamp: '2025-10-28 22:53:17+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/unionfind.test.cpp
-documentation_of: weilycoder/unionfind.hpp
+documentation_of: weilycoder/data-struct/unionfind.hpp
 layout: document
 redirect_from:
-- /library/weilycoder/unionfind.hpp
-- /library/weilycoder/unionfind.hpp.html
-title: weilycoder/unionfind.hpp
+- /library/weilycoder/data-struct/unionfind.hpp
+- /library/weilycoder/data-struct/unionfind.hpp.html
+title: weilycoder/data-struct/unionfind.hpp
 ---
