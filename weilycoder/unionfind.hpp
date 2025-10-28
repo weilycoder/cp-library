@@ -1,3 +1,6 @@
+#ifndef WEILYCODER_UNIONFIND_HPP
+#define WEILYCODER_UNIONFIND_HPP
+
 #include <algorithm>
 #include <numeric>
 #include <vector>
@@ -27,3 +30,5 @@ template <typename ptr_t = size_t> struct UnionFind {
   }
 };
 } // namespace weilycoder
+
+#endif
