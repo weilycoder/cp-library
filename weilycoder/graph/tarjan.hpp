@@ -29,8 +29,7 @@ template <typename ptr_t = size_t> struct TwoEdgeConnectedComponents {
 
   void tarjan(ptr_t u, ptr_t parent_edge) {
     dfn[u] = low[u] = ++dfs_time;
-    stk.push(u);
-    in_stack[u] = true;
+    stk.push(u), in_stack[u] = true;
 
     for (const auto &[v, edge_id] : graph[u]) {
       if (edge_id == parent_edge)
@@ -75,8 +74,7 @@ template <typename ptr_t = size_t> struct StrongConnectedComponents {
 
   void tarjan(ptr_t u) {
     dfn[u] = low[u] = ++dfs_time;
-    stk.push(u);
-    in_stack[u] = true;
+    stk.push(u), in_stack[u] = true;
 
     for (const auto &v : graph[u]) {
       if (!dfn[v])
@@ -100,6 +98,57 @@ template <typename ptr_t = size_t> struct StrongConnectedComponents {
       if (!dfn[i])
         tarjan(i);
     std::reverse(sccs.begin(), sccs.end());
+  }
+};
+
+template <typename ptr_t = size_t> struct BiconnectedComponents {
+  ptr_t dfs_time = 0;
+
+  std::stack<ptr_t> stk;
+  std::vector<ptr_t> dfn, low;
+  std::vector<std::vector<ptr_t>> graph;
+
+  std::vector<bool> is_cut;
+  std::vector<std::vector<ptr_t>> dccs;
+
+  BiconnectedComponents(ptr_t n) : dfn(n, 0), low(n, 0), graph(n), is_cut(n, false) {}
+
+  void add_edge(ptr_t u, ptr_t v) {
+    graph[u].push_back(v);
+    graph[v].push_back(u);
+  }
+
+  void tarjan(ptr_t u, bool is_root) {
+    dfn[u] = low[u] = ++dfs_time, stk.push(u);
+
+    if (is_root && graph[u].empty()) {
+      dccs.emplace_back();
+      dccs.back().push_back(u);
+      return;
+    }
+
+    ptr_t child = 0;
+    for (const auto &v : graph[u]) {
+      if (!dfn[v]) {
+        tarjan(v, false), low[u] = std::min(low[u], low[v]);
+        if (low[v] >= dfn[u]) {
+          if (++child > 1 || !is_root)
+            is_cut[u] = true;
+          dccs.emplace_back();
+          do
+            dccs.back().push_back(stk.top()), stk.pop();
+          while (dccs.back().back() != v);
+          dccs.back().push_back(u);
+        }
+      } else
+        low[u] = std::min(low[u], dfn[v]);
+    }
+  }
+
+  void solve() {
+    for (size_t i = 0; i < graph.size(); ++i)
+      if (!dfn[i])
+        tarjan(i, true);
   }
 };
 } // namespace weilycoder
