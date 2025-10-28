@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/unionfind"
 
-#include "../weilycoder/unionfind.hpp"
+#include "../weilycoder/data-struct/unionfind.hpp"
 #include <iostream>
 using namespace std;
 using namespace weilycoder;
