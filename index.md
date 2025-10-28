@@ -15,6 +15,9 @@ data:
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
+      path: test/strongly_connected_components.test.cpp
+      title: test/strongly_connected_components.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/two_edge_connected_components.test.cpp
       title: test/two_edge_connected_components.test.cpp
     - icon: ':heavy_check_mark:'
