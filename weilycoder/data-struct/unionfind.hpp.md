@@ -35,7 +35,7 @@ data:
   isVerificationFile: false
   path: weilycoder/data-struct/unionfind.hpp
   requiredBy: []
-  timestamp: '2025-10-28 22:53:17+08:00'
+  timestamp: '2025-10-28 23:07:26+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/unionfind.test.cpp

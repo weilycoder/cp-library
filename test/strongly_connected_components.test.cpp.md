@@ -86,7 +86,7 @@ data:
   isVerificationFile: true
   path: test/strongly_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2025-10-28 22:53:17+08:00'
+  timestamp: '2025-10-28 23:07:26+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/strongly_connected_components.test.cpp

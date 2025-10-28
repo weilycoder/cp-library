@@ -4,6 +4,9 @@ data:
   - name: weilycoder/data-struct
     pages:
     - icon: ':heavy_check_mark:'
+      path: weilycoder/data-struct/static_range_sum.hpp
+      title: weilycoder/data-struct/static_range_sum.hpp
+    - icon: ':heavy_check_mark:'
       path: weilycoder/data-struct/unionfind.hpp
       title: weilycoder/data-struct/unionfind.hpp
   - name: weilycoder/graph
@@ -17,6 +20,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/biconnected_components.test.cpp
       title: test/biconnected_components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/static_range_sum.test.cpp
+      title: test/static_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/strongly_connected_components.test.cpp
       title: test/strongly_connected_components.test.cpp
