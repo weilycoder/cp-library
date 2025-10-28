@@ -11,17 +11,16 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/two_edge_connected_components
+    PROBLEM: https://judge.yosupo.jp/problem/biconnected_components
     links:
-    - https://judge.yosupo.jp/problem/two_edge_connected_components
-  bundledCode: "#line 1 \"test/two_edge_connected_components.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\n\n#line 1\
-    \ \"weilycoder/graph/tarjan.hpp\"\n\n\n\n#include <algorithm>\n#include <cstddef>\n\
-    #include <stack>\n#include <utility>\n#include <vector>\n\nnamespace weilycoder\
-    \ {\ntemplate <typename ptr_t = size_t> struct StrongConnectedComponents {\n \
-    \ ptr_t dfs_time = 0;\n\n  std::vector<bool> in_stack;\n  std::stack<ptr_t> stk;\n\
-    \  std::vector<ptr_t> dfn, low;\n  std::vector<std::vector<ptr_t>> graph;\n\n\
-    \  std::vector<std::vector<ptr_t>> sccs;\n\n  StrongConnectedComponents(ptr_t\
+    - https://judge.yosupo.jp/problem/biconnected_components
+  bundledCode: "#line 1 \"test/biconnected_components.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/biconnected_components\"\n\n#line 1 \"weilycoder/graph/tarjan.hpp\"\
+    \n\n\n\n#include <algorithm>\n#include <cstddef>\n#include <stack>\n#include <utility>\n\
+    #include <vector>\n\nnamespace weilycoder {\ntemplate <typename ptr_t = size_t>\
+    \ struct StrongConnectedComponents {\n  ptr_t dfs_time = 0;\n\n  std::vector<bool>\
+    \ in_stack;\n  std::stack<ptr_t> stk;\n  std::vector<ptr_t> dfn, low;\n  std::vector<std::vector<ptr_t>>\
+    \ graph;\n\n  std::vector<std::vector<ptr_t>> sccs;\n\n  StrongConnectedComponents(ptr_t\
     \ n)\n      : in_stack(n, false), dfn(n, 0), low(n, 0), graph(n) {}\n\n  void\
     \ add_edge(ptr_t u, ptr_t v) { graph[u].push_back(v); }\n\n  void tarjan(ptr_t\
     \ u) {\n    dfn[u] = low[u] = ++dfs_time;\n    stk.push(u), in_stack[u] = true;\n\
@@ -64,36 +63,36 @@ data:
     \ != v);\n          dccs.back().push_back(u);\n        }\n      } else\n     \
     \   low[u] = std::min(low[u], dfn[v]);\n    }\n  }\n\n  void solve() {\n    for\
     \ (size_t i = 0; i < graph.size(); ++i)\n      if (!dfn[i])\n        tarjan(i,\
-    \ true);\n  }\n};\n} // namespace weilycoder\n\n\n#line 4 \"test/two_edge_connected_components.test.cpp\"\
+    \ true);\n  }\n};\n} // namespace weilycoder\n\n\n#line 4 \"test/biconnected_components.test.cpp\"\
     \n#include <iostream>\nusing namespace std;\nusing namespace weilycoder;\n\nint\
     \ main() {\n  cin.tie(nullptr)->sync_with_stdio(false);\n  cin.exceptions(cin.failbit\
-    \ | cin.badbit);\n  size_t n, m;\n  cin >> n >> m;\n\n  TwoEdgeConnectedComponents\
+    \ | cin.badbit);\n  size_t n, m;\n  cin >> n >> m;\n\n  BiconnectedComponents\
     \ graph(n);\n  for (size_t i = 0; i < m; ++i) {\n    size_t u, v;\n    cin >>\
-    \ u >> v;\n    graph.add_edge(u, v);\n  }\n\n  graph.solve();\n\n  cout << graph.eccs.size()\
-    \ << '\\n';\n  for (const auto &ecc : graph.eccs) {\n    cout << ecc.size();\n\
-    \    for (size_t u : ecc)\n      cout << ' ' << u;\n    cout << '\\n';\n  }\n\
+    \ u >> v;\n    graph.add_edge(u, v);\n  }\n\n  graph.solve();\n\n  cout << graph.dccs.size()\
+    \ << '\\n';\n  for (const auto &dcc : graph.dccs) {\n    cout << dcc.size();\n\
+    \    for (size_t u : dcc)\n      cout << ' ' << u;\n    cout << '\\n';\n  }\n\
     \  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_edge_connected_components\"\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/biconnected_components\"\
     \n\n#include \"../weilycoder/graph/tarjan.hpp\"\n#include <iostream>\nusing namespace\
     \ std;\nusing namespace weilycoder;\n\nint main() {\n  cin.tie(nullptr)->sync_with_stdio(false);\n\
     \  cin.exceptions(cin.failbit | cin.badbit);\n  size_t n, m;\n  cin >> n >> m;\n\
-    \n  TwoEdgeConnectedComponents graph(n);\n  for (size_t i = 0; i < m; ++i) {\n\
-    \    size_t u, v;\n    cin >> u >> v;\n    graph.add_edge(u, v);\n  }\n\n  graph.solve();\n\
-    \n  cout << graph.eccs.size() << '\\n';\n  for (const auto &ecc : graph.eccs)\
-    \ {\n    cout << ecc.size();\n    for (size_t u : ecc)\n      cout << ' ' << u;\n\
+    \n  BiconnectedComponents graph(n);\n  for (size_t i = 0; i < m; ++i) {\n    size_t\
+    \ u, v;\n    cin >> u >> v;\n    graph.add_edge(u, v);\n  }\n\n  graph.solve();\n\
+    \n  cout << graph.dccs.size() << '\\n';\n  for (const auto &dcc : graph.dccs)\
+    \ {\n    cout << dcc.size();\n    for (size_t u : dcc)\n      cout << ' ' << u;\n\
     \    cout << '\\n';\n  }\n  return 0;\n}\n"
   dependsOn:
   - weilycoder/graph/tarjan.hpp
   isVerificationFile: true
-  path: test/two_edge_connected_components.test.cpp
+  path: test/biconnected_components.test.cpp
   requiredBy: []
   timestamp: '2025-10-28 22:39:45+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/two_edge_connected_components.test.cpp
+documentation_of: test/biconnected_components.test.cpp
 layout: document
 redirect_from:
-- /verify/test/two_edge_connected_components.test.cpp
-- /verify/test/two_edge_connected_components.test.cpp.html
-title: test/two_edge_connected_components.test.cpp
+- /verify/test/biconnected_components.test.cpp
+- /verify/test/biconnected_components.test.cpp.html
+title: test/biconnected_components.test.cpp
 ---
