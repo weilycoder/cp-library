@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_sum"
 
-#include "../weilycoder/data-struct/static_range_sum.hpp"
+#include "../weilycoder/ds/static_range_sum.hpp"
 #include <cstdint>
 #include <iostream>
 #include <vector>
