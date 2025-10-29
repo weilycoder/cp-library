@@ -3,7 +3,7 @@
 #include "../weilycoder/fast-io.hpp"
 using namespace weilycoder;
 
-static FastIOStd<true> io;
+static FastIOMMap<true> io;
 
 int main() {
   uint64_t a = io.read_u64();

@@ -204,7 +204,7 @@ template <typename Reader, typename Writer, bool debug = false> struct FastIO {
 
 #if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
 template <bool debug = false>
-using FastIOStd = FastIO<FastReadMMap, FastWriteFWrite<>, debug>;
+using FastIOMMap = FastIO<FastReadMMap, FastWriteFWrite<>, debug>;
 #endif
 
 template <bool debug = false>
