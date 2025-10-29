@@ -69,7 +69,7 @@ template <size_t buffer_size = 1 << 20> struct FastWriteFWrite {
   void operator()(char c) { putchar(c); }
 };
 
-template <typename Reader, typename Writer> struct FastIO {
+template <typename Reader, typename Writer, bool debug = false> struct FastIO {
   Reader reader;
   Writer writer;
 
@@ -78,8 +78,19 @@ template <typename Reader, typename Writer> struct FastIO {
   FastIO(const FastIO &) = delete;
   FastIO &operator=(const FastIO &) = delete;
 
-  char getchar() { return reader.getchar(); }
-  void putchar(char c) { writer.putchar(c); }
+  char getchar() {
+    if constexpr (debug)
+      return std::getchar();
+    else
+      return reader.getchar();
+  }
+
+  void putchar(char c) {
+    if constexpr (debug)
+      std::putchar(c), std::fflush(stdout);
+    else
+      writer.putchar(c);
+  }
 
   void flush() { writer.flush(); }
 
@@ -108,7 +119,8 @@ template <typename Reader, typename Writer> struct FastIO {
   void write_u64_line(uint64_t x) { write_u64(x), putchar('\n'); }
 };
 
-using FastIODefault = FastIO<FastReadMMap, FastWriteFWrite<>>;
+template <bool debug = false>
+using FastIODefault = FastIO<FastReadMMap, FastWriteFWrite<>, debug>;
 } // namespace weilycoder
 
 #endif
