@@ -36,15 +36,37 @@ struct FastReadMMap {
       munmap(data, file_size);
   }
 
-  char getchar() {
+  inline char getchar() {
     return static_cast<size_t>(pos - data) < file_size ? *pos++ : EOF;
   }
 
-  char operator()() { return getchar(); }
+  inline char operator()() { return getchar(); }
+};
+
+template <size_t buffer_size = 1 << 20> struct FastReadFRead {
+  char buf[buffer_size], *pos = buf, *end = buf;
+
+  FastReadFRead() = default;
+
+  FastReadFRead(const FastReadFRead &) = delete;
+  FastReadFRead &operator=(const FastReadFRead &) = delete;
+
+  inline char getchar() {
+    return pos == end && (end = (pos = buf) + fread(buf, 1, buffer_size, stdin),
+                          pos == end)
+               ? EOF
+               : *pos++;
+  }
+
+  inline void clear() { pos = end = buf; }
+
+  inline void reopen() { clear(), fseek(stdin, 0, SEEK_SET); }
+
+  inline char operator()() { return getchar(); }
 };
 
 template <size_t buffer_size = 1 << 20> struct FastWriteFWrite {
-  char buffer[buffer_size], *pos = buffer;
+  char buf[buffer_size], *pos = buf;
 
   FastWriteFWrite() = default;
   ~FastWriteFWrite() { flush(); }
@@ -52,21 +74,21 @@ template <size_t buffer_size = 1 << 20> struct FastWriteFWrite {
   FastWriteFWrite(const FastWriteFWrite &) = delete;
   FastWriteFWrite &operator=(const FastWriteFWrite &) = delete;
 
-  void putchar(char c) {
-    if (pos - buffer == buffer_size)
+  inline void putchar(char c) {
+    if (pos - buf == buffer_size)
       flush();
     *pos++ = c;
   }
 
-  void flush() {
-    size_t write_size = pos - buffer;
+  inline void flush() {
+    size_t write_size = pos - buf;
     if (write_size) {
-      fwrite(buffer, 1, write_size, stdout);
-      pos = buffer;
+      fwrite(buf, 1, write_size, stdout);
+      pos = buf;
     }
   }
 
-  void operator()(char c) { putchar(c); }
+  inline void operator()(char c) { putchar(c); }
 };
 
 template <typename Reader, typename Writer, bool debug = false> struct FastIO {
@@ -78,23 +100,23 @@ template <typename Reader, typename Writer, bool debug = false> struct FastIO {
   FastIO(const FastIO &) = delete;
   FastIO &operator=(const FastIO &) = delete;
 
-  char getchar() {
+  inline char getchar() {
     if constexpr (debug)
       return std::getchar();
     else
       return reader.getchar();
   }
 
-  void putchar(char c) {
+  inline void putchar(char c) {
     if constexpr (debug)
       std::putchar(c), std::fflush(stdout);
     else
       writer.putchar(c);
   }
 
-  void flush() { writer.flush(); }
+  inline void flush() { writer.flush(); }
 
-  uint64_t read_u64() {
+  inline uint64_t read_u64() {
     char c;
     do
       c = getchar();
@@ -106,7 +128,7 @@ template <typename Reader, typename Writer, bool debug = false> struct FastIO {
     return x;
   }
 
-  void write_u64(uint64_t x) {
+  inline void write_u64(uint64_t x) {
     static char buf[20];
     size_t len = 0;
     do
@@ -116,11 +138,14 @@ template <typename Reader, typename Writer, bool debug = false> struct FastIO {
       putchar(buf[i]);
   }
 
-  void write_u64_line(uint64_t x) { write_u64(x), putchar('\n'); }
+  inline void write_u64_line(uint64_t x) { write_u64(x), putchar('\n'); }
 };
 
 template <bool debug = false>
-using FastIODefault = FastIO<FastReadMMap, FastWriteFWrite<>, debug>;
+using FastIOStd = FastIO<FastReadMMap, FastWriteFWrite<>, debug>;
+
+template <bool debug = false>
+using FastIOFile = FastIO<FastReadFRead<>, FastWriteFWrite<>, debug>;
 } // namespace weilycoder
 
 #endif
