@@ -5,11 +5,15 @@
 #include <cstdint>
 #include <cstdio>
 #include <limits>
+
+#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#endif
 
 namespace weilycoder {
+#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
 struct FastReadMMap {
   size_t file_size;
   char *data, *pos;
@@ -42,6 +46,7 @@ struct FastReadMMap {
 
   inline char operator()() { return getchar(); }
 };
+#endif
 
 template <size_t buffer_size = 1 << 20> struct FastReadFRead {
   char buf[buffer_size], *pos = buf, *end = buf;
@@ -197,8 +202,10 @@ template <typename Reader, typename Writer, bool debug = false> struct FastIO {
   }
 };
 
+#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)
 template <bool debug = false>
 using FastIOStd = FastIO<FastReadMMap, FastWriteFWrite<>, debug>;
+#endif
 
 template <bool debug = false>
 using FastIOFile = FastIO<FastReadFRead<>, FastWriteFWrite<>, debug>;
