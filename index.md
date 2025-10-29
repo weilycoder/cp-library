@@ -1,14 +1,14 @@
 ---
 data:
   libraryCategories:
-  - name: weilycoder/data-struct
+  - name: weilycoder/ds
     pages:
     - icon: ':heavy_check_mark:'
-      path: weilycoder/data-struct/static_range_sum.hpp
-      title: weilycoder/data-struct/static_range_sum.hpp
+      path: weilycoder/ds/static_range_sum.hpp
+      title: weilycoder/ds/static_range_sum.hpp
     - icon: ':heavy_check_mark:'
-      path: weilycoder/data-struct/unionfind.hpp
-      title: weilycoder/data-struct/unionfind.hpp
+      path: weilycoder/ds/unionfind.hpp
+      title: weilycoder/ds/unionfind.hpp
   - name: weilycoder
     pages:
     - icon: ':heavy_check_mark:'
@@ -23,11 +23,17 @@ data:
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
+      path: test/aplusb.test.cpp
+      title: test/aplusb.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/biconnected_components.test.cpp
       title: test/biconnected_components.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/many_aplusb.test.cpp
       title: test/many_aplusb.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/many_aplusb_128bit.test.cpp
+      title: test/many_aplusb_128bit.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/static_range_sum.test.cpp
       title: test/static_range_sum.test.cpp

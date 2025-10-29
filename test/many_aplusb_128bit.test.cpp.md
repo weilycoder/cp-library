@@ -11,10 +11,10 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/many_aplusb
+    PROBLEM: https://judge.yosupo.jp/problem/many_aplusb_128bit
     links:
-    - https://judge.yosupo.jp/problem/many_aplusb
-  bundledCode: "#line 1 \"test/many_aplusb.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\
+    - https://judge.yosupo.jp/problem/many_aplusb_128bit
+  bundledCode: "#line 1 \"test/many_aplusb_128bit.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb_128bit\"\
     \n\n#line 1 \"weilycoder/fast-io.hpp\"\n\n\n\n#include <cstddef>\n#include <cstdint>\n\
     #include <cstdio>\n#include <limits>\n#include <sys/mman.h>\n#include <sys/stat.h>\n\
     #include <unistd.h>\n\nnamespace weilycoder {\nstruct FastReadMMap {\n  size_t\
@@ -85,27 +85,27 @@ data:
     n');\n  }\n};\n\ntemplate <bool debug = false>\nusing FastIOStd = FastIO<FastReadMMap,\
     \ FastWriteFWrite<>, debug>;\n\ntemplate <bool debug = false>\nusing FastIOFile\
     \ = FastIO<FastReadFRead<>, FastWriteFWrite<>, debug>;\n} // namespace weilycoder\n\
-    \n\n#line 4 \"test/many_aplusb.test.cpp\"\nusing namespace weilycoder;\n\nstatic\
-    \ FastIOStd<> io;\n\nint main() {\n  size_t t = io.read_u64();\n  while (t--)\
-    \ {\n    uint64_t a = io.read_u64();\n    uint64_t b = io.read_u64();\n    uint64_t\
-    \ c = a + b;\n    io.write_u64_line(c);\n  }\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb\"\n\n#include\
-    \ \"../weilycoder/fast-io.hpp\"\nusing namespace weilycoder;\n\nstatic FastIOStd<>\
-    \ io;\n\nint main() {\n  size_t t = io.read_u64();\n  while (t--) {\n    uint64_t\
-    \ a = io.read_u64();\n    uint64_t b = io.read_u64();\n    uint64_t c = a + b;\n\
-    \    io.write_u64_line(c);\n  }\n  return 0;\n}"
+    \n\n#line 4 \"test/many_aplusb_128bit.test.cpp\"\nusing namespace weilycoder;\n\
+    \nstatic FastIOFile<> io;\n\nint main() {\n  size_t t = io.read_u64();\n  while\
+    \ (t--) {\n    auto a = io.read_i128();\n    auto b = io.read_i128();\n    io.write_i128_line(a\
+    \ + b);\n  }\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/many_aplusb_128bit\"\n\n\
+    #include \"../weilycoder/fast-io.hpp\"\nusing namespace weilycoder;\n\nstatic\
+    \ FastIOFile<> io;\n\nint main() {\n  size_t t = io.read_u64();\n  while (t--)\
+    \ {\n    auto a = io.read_i128();\n    auto b = io.read_i128();\n    io.write_i128_line(a\
+    \ + b);\n  }\n  return 0;\n}"
   dependsOn:
   - weilycoder/fast-io.hpp
   isVerificationFile: true
-  path: test/many_aplusb.test.cpp
+  path: test/many_aplusb_128bit.test.cpp
   requiredBy: []
   timestamp: '2025-10-29 23:15:34+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/many_aplusb.test.cpp
+documentation_of: test/many_aplusb_128bit.test.cpp
 layout: document
 redirect_from:
-- /verify/test/many_aplusb.test.cpp
-- /verify/test/many_aplusb.test.cpp.html
-title: test/many_aplusb.test.cpp
+- /verify/test/many_aplusb_128bit.test.cpp
+- /verify/test/many_aplusb_128bit.test.cpp.html
+title: test/many_aplusb_128bit.test.cpp
 ---
