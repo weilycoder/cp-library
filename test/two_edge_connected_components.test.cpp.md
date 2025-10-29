@@ -29,10 +29,11 @@ data:
     \ low[u] = std::min(low[u], low[v]);\n      else if (in_stack[v])\n        low[u]\
     \ = std::min(low[u], dfn[v]);\n    }\n\n    if (dfn[u] == low[u]) {\n      sccs.emplace_back();\n\
     \      sccs.back().push_back(u);\n      in_stack[u] = false;\n      while (stk.top()\
-    \ != u)\n        sccs.back().push_back(stk.top()), in_stack[stk.top()] = false,\
-    \ stk.pop();\n      stk.pop();\n    }\n  }\n\n  void solve() {\n    for (size_t\
-    \ i = 0; i < graph.size(); ++i)\n      if (!dfn[i])\n        tarjan(i);\n    std::reverse(sccs.begin(),\
-    \ sccs.end());\n  }\n};\n\ntemplate <typename ptr_t = size_t> struct TwoEdgeConnectedComponents\
+    \ != u)\n        sccs.back().push_back(stk.top()), in_stack[stk.top()] = false,\n\
+    \                                          stk.pop();\n      stk.pop();\n    }\n\
+    \  }\n\n  void solve() {\n    for (size_t i = 0; i < graph.size(); ++i)\n    \
+    \  if (!dfn[i])\n        tarjan(i);\n    std::reverse(sccs.begin(), sccs.end());\n\
+    \  }\n};\n\ntemplate <typename ptr_t = size_t> struct TwoEdgeConnectedComponents\
     \ {\n  ptr_t dfs_time = 0, edge_time = 1;\n\n  std::vector<bool> in_stack;\n \
     \ std::stack<ptr_t> stk;\n  std::vector<ptr_t> dfn, low;\n  std::vector<std::vector<std::pair<ptr_t,\
     \ ptr_t>>> graph;\n\n  std::vector<std::vector<ptr_t>> eccs;\n\n  TwoEdgeConnectedComponents(ptr_t\
@@ -46,21 +47,22 @@ data:
     \        low[u] = std::min(low[u], dfn[v]);\n    }\n\n    if (dfn[u] == low[u])\
     \ {\n      eccs.emplace_back();\n      eccs.back().push_back(u);\n      in_stack[u]\
     \ = false;\n      while (stk.top() != u)\n        eccs.back().push_back(stk.top()),\
-    \ in_stack[stk.top()] = false, stk.pop();\n      stk.pop();\n    }\n  }\n\n  void\
-    \ solve() {\n    for (size_t i = 0; i < graph.size(); ++i)\n      if (!dfn[i])\n\
-    \        tarjan(i, 0);\n  }\n};\n\ntemplate <typename ptr_t = size_t> struct BiconnectedComponents\
-    \ {\n  ptr_t dfs_time = 0;\n\n  std::stack<ptr_t> stk;\n  std::vector<ptr_t> dfn,\
-    \ low;\n  std::vector<std::vector<ptr_t>> graph;\n\n  std::vector<bool> is_cut;\n\
-    \  std::vector<std::vector<ptr_t>> dccs;\n\n  BiconnectedComponents(ptr_t n) :\
-    \ dfn(n, 0), low(n, 0), graph(n), is_cut(n, false) {}\n\n  void add_edge(ptr_t\
-    \ u, ptr_t v) {\n    graph[u].push_back(v);\n    graph[v].push_back(u);\n  }\n\
-    \n  void tarjan(ptr_t u, bool is_root) {\n    dfn[u] = low[u] = ++dfs_time, stk.push(u);\n\
-    \n    if (is_root && graph[u].empty()) {\n      dccs.emplace_back();\n      dccs.back().push_back(u);\n\
-    \      return;\n    }\n\n    ptr_t child = 0;\n    for (const auto &v : graph[u])\
-    \ {\n      if (!dfn[v]) {\n        tarjan(v, false), low[u] = std::min(low[u],\
-    \ low[v]);\n        if (low[v] >= dfn[u]) {\n          if (++child > 1 || !is_root)\n\
-    \            is_cut[u] = true;\n          dccs.emplace_back();\n          do\n\
-    \            dccs.back().push_back(stk.top()), stk.pop();\n          while (dccs.back().back()\
+    \ in_stack[stk.top()] = false,\n                                          stk.pop();\n\
+    \      stk.pop();\n    }\n  }\n\n  void solve() {\n    for (size_t i = 0; i <\
+    \ graph.size(); ++i)\n      if (!dfn[i])\n        tarjan(i, 0);\n  }\n};\n\ntemplate\
+    \ <typename ptr_t = size_t> struct BiconnectedComponents {\n  ptr_t dfs_time =\
+    \ 0;\n\n  std::stack<ptr_t> stk;\n  std::vector<ptr_t> dfn, low;\n  std::vector<std::vector<ptr_t>>\
+    \ graph;\n\n  std::vector<bool> is_cut;\n  std::vector<std::vector<ptr_t>> dccs;\n\
+    \n  BiconnectedComponents(ptr_t n)\n      : dfn(n, 0), low(n, 0), graph(n), is_cut(n,\
+    \ false) {}\n\n  void add_edge(ptr_t u, ptr_t v) {\n    graph[u].push_back(v);\n\
+    \    graph[v].push_back(u);\n  }\n\n  void tarjan(ptr_t u, bool is_root) {\n \
+    \   dfn[u] = low[u] = ++dfs_time, stk.push(u);\n\n    if (is_root && graph[u].empty())\
+    \ {\n      dccs.emplace_back();\n      dccs.back().push_back(u);\n      return;\n\
+    \    }\n\n    ptr_t child = 0;\n    for (const auto &v : graph[u]) {\n      if\
+    \ (!dfn[v]) {\n        tarjan(v, false), low[u] = std::min(low[u], low[v]);\n\
+    \        if (low[v] >= dfn[u]) {\n          if (++child > 1 || !is_root)\n   \
+    \         is_cut[u] = true;\n          dccs.emplace_back();\n          do\n  \
+    \          dccs.back().push_back(stk.top()), stk.pop();\n          while (dccs.back().back()\
     \ != v);\n          dccs.back().push_back(u);\n        }\n      } else\n     \
     \   low[u] = std::min(low[u], dfn[v]);\n    }\n  }\n\n  void solve() {\n    for\
     \ (size_t i = 0; i < graph.size(); ++i)\n      if (!dfn[i])\n        tarjan(i,\
@@ -87,7 +89,7 @@ data:
   isVerificationFile: true
   path: test/two_edge_connected_components.test.cpp
   requiredBy: []
-  timestamp: '2025-10-28 23:07:26+08:00'
+  timestamp: '2025-10-29 20:09:11+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/two_edge_connected_components.test.cpp

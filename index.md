@@ -9,6 +9,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: weilycoder/data-struct/unionfind.hpp
       title: weilycoder/data-struct/unionfind.hpp
+  - name: weilycoder
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: weilycoder/fast-io.hpp
+      title: weilycoder/fast-io.hpp
   - name: weilycoder/graph
     pages:
     - icon: ':heavy_check_mark:'
@@ -20,6 +25,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/biconnected_components.test.cpp
       title: test/biconnected_components.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/many_aplusb.test.cpp
+      title: test/many_aplusb.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/static_range_sum.test.cpp
       title: test/static_range_sum.test.cpp
