@@ -39,7 +39,8 @@ template <typename ptr_t = size_t> struct StrongConnectedComponents {
       sccs.back().push_back(u);
       in_stack[u] = false;
       while (stk.top() != u)
-        sccs.back().push_back(stk.top()), in_stack[stk.top()] = false, stk.pop();
+        sccs.back().push_back(stk.top()), in_stack[stk.top()] = false,
+                                          stk.pop();
       stk.pop();
     }
   }
@@ -89,7 +90,8 @@ template <typename ptr_t = size_t> struct TwoEdgeConnectedComponents {
       eccs.back().push_back(u);
       in_stack[u] = false;
       while (stk.top() != u)
-        eccs.back().push_back(stk.top()), in_stack[stk.top()] = false, stk.pop();
+        eccs.back().push_back(stk.top()), in_stack[stk.top()] = false,
+                                          stk.pop();
       stk.pop();
     }
   }
@@ -111,7 +113,8 @@ template <typename ptr_t = size_t> struct BiconnectedComponents {
   std::vector<bool> is_cut;
   std::vector<std::vector<ptr_t>> dccs;
 
-  BiconnectedComponents(ptr_t n) : dfn(n, 0), low(n, 0), graph(n), is_cut(n, false) {}
+  BiconnectedComponents(ptr_t n)
+      : dfn(n, 0), low(n, 0), graph(n), is_cut(n, false) {}
 
   void add_edge(ptr_t u, ptr_t v) {
     graph[u].push_back(v);
