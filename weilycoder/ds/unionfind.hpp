@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_UNIONFIND_HPP
 #define WEILYCODER_UNIONFIND_HPP
 
+/**
+ * @file unionfind.hpp
+ * @brief Union-Find (Disjoint Set Union) Data Structure
+ */
+
 #include <algorithm>
 #include <numeric>
 #include <vector>

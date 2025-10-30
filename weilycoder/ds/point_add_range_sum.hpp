@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_POINT_ADD_RANGE_SUM_HPP
 #define WEILYCODER_POINT_ADD_RANGE_SUM_HPP
 
+/**
+ * @file point_add_range_sum.hpp
+ * @brief Point Add Range Sum using Fenwick Tree
+ */
+
 #include "group.hpp"
 #include <cstddef>
 #include <stdexcept>

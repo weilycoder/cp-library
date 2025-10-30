@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_GROUP_HPP
 #define WEILYCODER_GROUP_HPP
 
+/**
+ * @file group.hpp
+ * @brief Group Definitions
+ */
+
 namespace weilycoder {
 /**
  * @brief Additive Group

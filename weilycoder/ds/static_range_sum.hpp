@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_STATIC_RANGE_SUM_HPP
 #define WEILYCODER_STATIC_RANGE_SUM_HPP
 
+/**
+ * @file static_range_sum.hpp
+ * @brief Static Range Sum using Prefix Sums
+ */
+
 #include "group.hpp"
 #include <cstddef>
 #include <stdexcept>
