@@ -3,6 +3,7 @@
 
 #include "group.hpp"
 #include <cstddef>
+#include <stdexcept>
 #include <vector>
 
 namespace weilycoder {
@@ -58,6 +59,8 @@ public:
     }
   }
 
+  size_t size() const { return data.size() - 1; }
+
   /**
    * @brief Adds value x to element at index i
    * @param i Index to update
@@ -74,6 +77,8 @@ public:
    * @return The sum of elements in the range [0, i)
    */
   T prefix_sum(size_t i) const {
+    if (i > size())
+      throw std::out_of_range("Index out of range in prefix_sum");
     T result = Group::identity();
     for (; i > 0; i -= i & -i)
       result = Group::operation(result, data[i]);
@@ -87,6 +92,8 @@ public:
    * @return The sum of elements in the range [l, r)
    */
   T range_sum(size_t l, size_t r) const {
+    if (l > r || r > size())
+      throw std::out_of_range("Invalid range for range_sum");
     return Group::operation(prefix_sum(r), Group::inverse(prefix_sum(l)));
   }
 };
