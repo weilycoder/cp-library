@@ -16,17 +16,19 @@ data:
     - https://judge.yosupo.jp/problem/aplusb
   bundledCode: "#line 1 \"test/aplusb.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\
     \n\n#line 1 \"weilycoder/fast-io.hpp\"\n\n\n\n#include <cstddef>\n#include <cstdint>\n\
-    #include <cstdio>\n#include <limits>\n#include <sys/mman.h>\n#include <sys/stat.h>\n\
-    #include <unistd.h>\n\nnamespace weilycoder {\nstruct FastReadMMap {\n  size_t\
-    \ file_size;\n  char *data, *pos;\n\n  FastReadMMap(const FastReadMMap &) = delete;\n\
-    \  FastReadMMap &operator=(const FastReadMMap &) = delete;\n\n  FastReadMMap()\
-    \ {\n    struct stat st;\n\n    if (fstat(0, &st) != 0) {\n      file_size = std::numeric_limits<size_t>::max();\n\
+    #include <cstdio>\n#include <limits>\n\n#if defined(__linux__) || defined(__unix__)\
+    \ || defined(__APPLE__)\n#include <sys/mman.h>\n#include <sys/stat.h>\n#include\
+    \ <unistd.h>\n#endif\n\nnamespace weilycoder {\n#if defined(__linux__) || defined(__unix__)\
+    \ || defined(__APPLE__)\nstruct FastReadMMap {\n  size_t file_size;\n  char *data,\
+    \ *pos;\n\n  FastReadMMap(const FastReadMMap &) = delete;\n  FastReadMMap &operator=(const\
+    \ FastReadMMap &) = delete;\n\n  FastReadMMap() {\n    struct stat st;\n\n   \
+    \ if (fstat(0, &st) != 0) {\n      file_size = std::numeric_limits<size_t>::max();\n\
     \      return;\n    }\n\n    file_size = st.st_size;\n    data = reinterpret_cast<char\
     \ *>(\n        mmap(nullptr, file_size, PROT_READ, MAP_PRIVATE, 0, 0));\n    pos\
     \ = data;\n  }\n\n  ~FastReadMMap() {\n    if (file_size != std::numeric_limits<size_t>::max())\n\
     \      munmap(data, file_size);\n  }\n\n  inline char getchar() {\n    return\
     \ static_cast<size_t>(pos - data) < file_size ? *pos++ : EOF;\n  }\n\n  inline\
-    \ char operator()() { return getchar(); }\n};\n\ntemplate <size_t buffer_size\
+    \ char operator()() { return getchar(); }\n};\n#endif\n\ntemplate <size_t buffer_size\
     \ = 1 << 20> struct FastReadFRead {\n  char buf[buffer_size], *pos = buf, *end\
     \ = buf;\n\n  FastReadFRead() = default;\n\n  FastReadFRead(const FastReadFRead\
     \ &) = delete;\n  FastReadFRead &operator=(const FastReadFRead &) = delete;\n\n\
@@ -82,14 +84,15 @@ data:
     \  inline void write_u64_line(uint64_t x) { write_u64(x), putchar('\\n'); }\n\
     \  inline void write_i128_line(__int128 x) { write_i128(x), putchar('\\n'); }\n\
     \  inline void write_u128_line(unsigned __int128 x) {\n    write_u128(x), putchar('\\\
-    n');\n  }\n};\n\ntemplate <bool debug = false>\nusing FastIOStd = FastIO<FastReadMMap,\
-    \ FastWriteFWrite<>, debug>;\n\ntemplate <bool debug = false>\nusing FastIOFile\
-    \ = FastIO<FastReadFRead<>, FastWriteFWrite<>, debug>;\n} // namespace weilycoder\n\
-    \n\n#line 4 \"test/aplusb.test.cpp\"\nusing namespace weilycoder;\n\nstatic FastIOStd<true>\
-    \ io;\n\nint main() {\n  uint64_t a = io.read_u64();\n  uint64_t b = io.read_u64();\n\
-    \  io.write_u64_line(a + b);\n  return 0;\n}\n"
+    n');\n  }\n};\n\n#if defined(__linux__) || defined(__unix__) || defined(__APPLE__)\n\
+    template <bool debug = false>\nusing FastIOMMap = FastIO<FastReadMMap, FastWriteFWrite<>,\
+    \ debug>;\n#endif\n\ntemplate <bool debug = false>\nusing FastIOFile = FastIO<FastReadFRead<>,\
+    \ FastWriteFWrite<>, debug>;\n} // namespace weilycoder\n\n\n#line 4 \"test/aplusb.test.cpp\"\
+    \nusing namespace weilycoder;\n\nstatic FastIOMMap<true> io;\n\nint main() {\n\
+    \  uint64_t a = io.read_u64();\n  uint64_t b = io.read_u64();\n  io.write_u64_line(a\
+    \ + b);\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/aplusb\"\n\n#include \"\
-    ../weilycoder/fast-io.hpp\"\nusing namespace weilycoder;\n\nstatic FastIOStd<true>\
+    ../weilycoder/fast-io.hpp\"\nusing namespace weilycoder;\n\nstatic FastIOMMap<true>\
     \ io;\n\nint main() {\n  uint64_t a = io.read_u64();\n  uint64_t b = io.read_u64();\n\
     \  io.write_u64_line(a + b);\n  return 0;\n}"
   dependsOn:
@@ -97,7 +100,7 @@ data:
   isVerificationFile: true
   path: test/aplusb.test.cpp
   requiredBy: []
-  timestamp: '2025-10-29 23:15:34+08:00'
+  timestamp: '2025-10-29 23:28:06+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aplusb.test.cpp
