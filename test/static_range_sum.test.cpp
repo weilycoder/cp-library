@@ -17,7 +17,7 @@ int main() {
   for (size_t i = 0; i < n; ++i)
     cin >> arr[i];
 
-  StaticRangeSum<uint64_t> sum(arr);
+  StaticRangeSum<AddGroup<uint64_t>> sum(arr);
   while (q--) {
     size_t l, r;
     cin >> l >> r;
