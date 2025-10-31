@@ -6,49 +6,11 @@
  * @brief Prime Number Utilities
  */
 
+#include "modint.hpp"
 #include <cstdint>
 #include <type_traits>
 
 namespace weilycoder {
-/**
- * @brief Perform modular multiplication for 64-bit integers.
- * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
- *         all inputs are small enough to avoid overflow (i.e. bit-32).
- * @param a The first multiplicand.
- * @param b The second multiplicand.
- * @param modulus The modulus.
- * @return (a * b) % modulus
- */
-template <bool bit32 = false>
-uint64_t modular_multiply(uint64_t a, uint64_t b, uint64_t modulus) {
-  if constexpr (bit32)
-    return a * b % modulus;
-  else
-    return static_cast<unsigned __int128>(a) * b % modulus;
-}
-
-/**
- * @brief Perform modular exponentiation for 64-bit integers.
- * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
- *         all inputs are small enough to avoid overflow (i.e. bit-32).
- * @param base The base number.
- * @param exponent The exponent.
- * @param modulus The modulus.
- * @return (base^exponent) % modulus
- */
-template <bool bit32 = false>
-constexpr uint64_t fast_power(uint64_t base, uint64_t exponent, uint64_t modulus) {
-  uint64_t result = 1 % modulus;
-  base %= modulus;
-  while (exponent > 0) {
-    if (exponent & 1)
-      result = modular_multiply<bit32>(result, base, modulus);
-    base = modular_multiply<bit32>(base, base, modulus);
-    exponent >>= 1;
-  }
-  return result;
-}
-
 /**
  * @brief Miller-Rabin primality test for a given base.
  * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
@@ -61,11 +23,11 @@ constexpr uint64_t fast_power(uint64_t base, uint64_t exponent, uint64_t modulus
  */
 template <bool bit32, uint64_t base>
 constexpr bool miller_rabin_test(uint64_t n, uint64_t d, uint32_t s) {
-  uint64_t x = fast_power<bit32>(base, d, n);
+  uint64_t x = fast_power_64<bit32>(base, d, n);
   if (x == 0 || x == 1 || x == n - 1)
     return true;
   for (uint32_t r = 1; r < s; ++r) {
-    x = modular_multiply<bit32>(x, x, n);
+    x = modular_multiply_64<bit32>(x, x, n);
     if (x == n - 1)
       return true;
   }
