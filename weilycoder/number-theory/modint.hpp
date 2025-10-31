@@ -1,12 +1,12 @@
 #ifndef WEILYCODER_MODINT_HPP
 #define WEILYCODER_MODINT_HPP
 
-#include <cstdint>
-
 /**
  * @file modint.hpp
  * @brief Modular Integer Arithmetic Utilities
  */
+
+#include <cstdint>
 
 namespace weilycoder {
 /**
