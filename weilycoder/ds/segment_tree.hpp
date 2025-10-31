@@ -40,27 +40,47 @@ private:
         Monoid::operation(data[data[node].left].value, data[data[node].right].value);
   }
 
-  ptr_t build(ptr_t l, ptr_t r) {
+  ptr_t init(ptr_t l, ptr_t r) {
     ptr_t node = data.size();
     data.emplace_back();
 
     if (r - l > 1) {
       ptr_t mid = l + ((r - l) >> 1);
-      ptr_t left = build(l, mid), right = build(mid, r);
+      ptr_t left = init(l, mid), right = init(mid, r);
       data[node].left = left, data[node].right = right;
     }
 
     return node;
   }
 
-  void init(ptr_t node, ptr_t l, ptr_t r, const std::vector<T> &arr) {
+  ptr_t init(ptr_t l, ptr_t r, const std::vector<T> &arr) {
+    ptr_t node = data.size();
+    data.emplace_back();
+
     if (r - l == 1)
       data[node].value = arr[l];
     else {
       ptr_t mid = l + ((r - l) >> 1);
-      init(data[node].left, l, mid, arr);
-      init(data[node].right, mid, r, arr);
+      ptr_t left = init(l, mid, arr);
+      ptr_t right = init(mid, r, arr);
+      data[node].left = left, data[node].right = right;
       pushup(node);
+    }
+
+    return node;
+  }
+
+  void build(ptr_t l, ptr_t r) {
+    if (r - l > 0) {
+      data.reserve((r - l) * 2 - 1);
+      init(l, r);
+    }
+  }
+
+  void build(const std::vector<T> &arr) {
+    if (!arr.empty()) {
+      data.reserve(arr.size() * 2 - 1);
+      init(0, arr.size(), arr);
     }
   }
 
@@ -131,7 +151,7 @@ public:
    */
   explicit SegmentTree(const std::vector<T> &arr)
       : tl(0), tr(static_cast<ptr_t>(arr.size())) {
-    build(tl, tr), init(0, tl, tr, arr);
+    build(arr);
   }
 
   /**
@@ -178,6 +198,9 @@ public:
       throw std::out_of_range("SegmentTree::range_query: range out of bounds");
     return range_query(0, tl, tr, left, right);
   }
+
+  ptr_t left() const { return tl; }
+  ptr_t right() const { return tr; }
 };
 } // namespace weilycoder
 
