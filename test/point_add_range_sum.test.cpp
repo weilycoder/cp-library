@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_range_sum"
 
+#include "../weilycoder/ds/group.hpp"
 #include "../weilycoder/ds/point_add_range_sum.hpp"
 #include <cstdint>
 #include <iostream>

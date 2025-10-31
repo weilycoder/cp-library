@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 
+#include "../weilycoder/ds/group.hpp"
 #include "../weilycoder/ds/offline_static_range_query.hpp"
 #include <cstdint>
 #include <iostream>

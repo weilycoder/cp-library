@@ -6,7 +6,6 @@
  * @brief Offline Static Range Query Data Structure
  */
 
-#include "group.hpp"
 #include <cstddef>
 #include <numeric>
 #include <stdexcept>

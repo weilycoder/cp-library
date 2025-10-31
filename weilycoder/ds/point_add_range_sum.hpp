@@ -6,7 +6,6 @@
  * @brief Point Add Range Sum using Fenwick Tree
  */
 
-#include "group.hpp"
 #include <cstddef>
 #include <stdexcept>
 #include <vector>

@@ -6,7 +6,6 @@
  * @brief Static Range Sum using Prefix Sums
  */
 
-#include "group.hpp"
 #include <cstddef>
 #include <stdexcept>
 #include <vector>
