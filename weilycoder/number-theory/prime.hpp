@@ -118,7 +118,7 @@ template <bool bit32, uint64_t... bases> constexpr bool miller_rabin(uint64_t n)
  *        Uses a fixed set of bases that guarantee correctness
  *        for 64-bit integers.
  * @param n The number to test for primality.
- * @return true if n is prime, false if composite.
+ * @return true if n is prime, false if not prime.
  */
 constexpr bool miller_rabin64(uint64_t n) {
   return miller_rabin<false, 2, 325, 9375, 28178, 450775, 9780504, 1795265022>(n);
@@ -129,7 +129,7 @@ constexpr bool miller_rabin64(uint64_t n) {
  *        Uses a fixed set of bases that guarantee correctness
  *        for 32-bit integers.
  * @param n The number to test for primality.
- * @return true if n is prime, false if composite.
+ * @return true if n is prime, false if not prime.
  */
 constexpr bool miller_rabin32(uint32_t n) { return miller_rabin<true, 2, 7, 61>(n); }
 } // namespace weilycoder
