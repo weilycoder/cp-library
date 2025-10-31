@@ -96,7 +96,8 @@ public:
    * @brief Constructor
    * @param n The size of the data
    */
-  OfflineStaticRangeQuery(ptr_t n) : query_count(0), data_size(n), queries(n + 1) {}
+  explicit OfflineStaticRangeQuery(ptr_t n)
+      : query_count(0), data_size(n), queries(n + 1) {}
 
   /**
    * @brief Add a query for the range [l, r)
