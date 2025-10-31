@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_OFFLINE_STATIC_RANGE_QUERY_HPP
 #define WEILYCODER_OFFLINE_STATIC_RANGE_QUERY_HPP
 
+/**
+ * @file offline_static_range_query.hpp
+ * @brief Offline Static Range Query Data Structure
+ */
+
 #include "group.hpp"
 #include <cstddef>
 #include <numeric>
