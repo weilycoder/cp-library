@@ -7,6 +7,9 @@ data:
       path: weilycoder/ds/group.hpp
       title: Group Definitions
     - icon: ':heavy_check_mark:'
+      path: weilycoder/ds/offline_static_range_query.hpp
+      title: Offline Static Range Query Data Structure
+    - icon: ':heavy_check_mark:'
       path: weilycoder/ds/point_add_range_sum.hpp
       title: Point Add Range Sum using Fenwick Tree
     - icon: ':heavy_check_mark:'
@@ -25,6 +28,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: weilycoder/graph/tarjan.hpp
       title: Tarjan's Algorithm for Graph Connected Problems
+  - name: weilycoder/number-theory
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: weilycoder/number-theory/modint.hpp
+      title: Modular Integer Arithmetic Utilities
+    - icon: ':heavy_check_mark:'
+      path: weilycoder/number-theory/prime.hpp
+      title: Prime Number Utilities
   verificationCategories:
   - name: test
     pages:
@@ -44,8 +55,14 @@ data:
       path: test/point_add_range_sum.test.cpp
       title: test/point_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/primality_test.test.cpp
+      title: test/primality_test.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/static_range_sum.test.cpp
       title: test/static_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/staticrmq.test.cpp
+      title: test/staticrmq.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/strongly_connected_components.test.cpp
       title: test/strongly_connected_components.test.cpp

@@ -172,7 +172,7 @@ data:
   isVerificationFile: false
   path: weilycoder/graph/tarjan.hpp
   requiredBy: []
-  timestamp: '2025-10-30 21:08:13+08:00'
+  timestamp: '2025-10-31 09:52:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/two_edge_connected_components.test.cpp

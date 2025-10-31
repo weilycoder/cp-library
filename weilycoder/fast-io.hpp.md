@@ -288,7 +288,7 @@ data:
   isVerificationFile: false
   path: weilycoder/fast-io.hpp
   requiredBy: []
-  timestamp: '2025-10-30 21:08:13+08:00'
+  timestamp: '2025-10-31 09:52:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aplusb.test.cpp
