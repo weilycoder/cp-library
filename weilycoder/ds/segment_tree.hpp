@@ -12,6 +12,62 @@
 #include <vector>
 
 namespace weilycoder {
+template <typename _Monoid, typename _ptr_t = size_t> struct SegmentTreeHeapSon {
+protected:
+  using T = typename _Monoid::value_type;
+  using ptr_t = _ptr_t;
+  using Monoid = _Monoid;
+  static constexpr ptr_t null = std::numeric_limits<ptr_t>::max();
+
+private:
+  ptr_t st, ed;
+  std::vector<T> data;
+
+  void init(ptr_t node, ptr_t l, ptr_t r, const std::vector<T> &arr) {
+    if (r - l == 1) {
+      data[node] = arr[l];
+    } else {
+      ptr_t mid = l + ((r - l) >> 1);
+      init(node * 2 + 1, l, mid, arr), init(node * 2 + 2, mid, r, arr);
+      pushup(node);
+    }
+  }
+
+protected:
+  ptr_t get_st() const { return st; }
+  ptr_t get_ed() const { return ed; }
+
+  T &get_value(ptr_t node) { return data[node]; }
+  const T &get_value(ptr_t node) const { return data[node]; }
+
+  ptr_t get_lc(ptr_t node) const { return node * 2 + 1; }
+  ptr_t get_rc(ptr_t node) const { return node * 2 + 2; }
+
+  void pushdown(ptr_t node) const {}
+  void pushup(ptr_t node) {
+    data[node] = Monoid::operation(data[get_lc(node)], data[get_rc(node)]);
+  }
+
+  explicit SegmentTreeHeapSon(ptr_t size) : st(0), ed(size) {
+    data.resize(size * 4, Monoid::identity());
+  }
+
+  explicit SegmentTreeHeapSon(ptr_t st, ptr_t ed) : st(st), ed(ed) {
+    data.resize((ed - st) * 4, Monoid::identity());
+  }
+
+  explicit SegmentTreeHeapSon(const std::vector<T> &arr)
+      : st(0), ed(static_cast<ptr_t>(arr.size())) {
+    data.resize(arr.size() * 4, Monoid::identity());
+    init(0, st, ed, arr);
+  }
+};
+
+/**
+ * @brief Segment Tree Base Class that stores child pointers
+ * @tparam _Monoid The monoid defining the operation and identity
+ * @tparam _ptr_t The pointer type used for indexing nodes (default: size_t)
+ */
 template <typename _Monoid, typename _ptr_t = size_t> struct SegmentTreeStoreSon {
 protected:
   using T = typename _Monoid::value_type;
