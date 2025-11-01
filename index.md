@@ -13,6 +13,9 @@ data:
       path: weilycoder/ds/point_add_range_sum.hpp
       title: Point Add Range Sum using Fenwick Tree
     - icon: ':heavy_check_mark:'
+      path: weilycoder/ds/segment_tree.hpp
+      title: Segment Tree Data Structure
+    - icon: ':heavy_check_mark:'
       path: weilycoder/ds/static_range_sum.hpp
       title: Static Range Sum using Prefix Sums
     - icon: ':heavy_check_mark:'
@@ -54,6 +57,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/point_add_range_sum.test.cpp
       title: test/point_add_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/point_set_range_composite.test.cpp
+      title: test/point_set_range_composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/primality_test.test.cpp
       title: test/primality_test.test.cpp

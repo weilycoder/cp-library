@@ -1,16 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: weilycoder/ds/offline_static_range_query.hpp
-    title: Offline Static Range Query Data Structure
-  - icon: ':heavy_check_mark:'
-    path: weilycoder/ds/point_add_range_sum.hpp
-    title: Point Add Range Sum using Fenwick Tree
-  - icon: ':heavy_check_mark:'
-    path: weilycoder/ds/static_range_sum.hpp
-    title: Static Range Sum using Prefix Sums
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/point_add_range_sum.test.cpp
@@ -68,11 +59,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: weilycoder/ds/group.hpp
-  requiredBy:
-  - weilycoder/ds/point_add_range_sum.hpp
-  - weilycoder/ds/static_range_sum.hpp
-  - weilycoder/ds/offline_static_range_query.hpp
-  timestamp: '2025-10-31 09:52:58+08:00'
+  requiredBy: []
+  timestamp: '2025-11-01 07:16:21+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/static_range_sum.test.cpp

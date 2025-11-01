@@ -1,9 +1,6 @@
 ---
 data:
-  _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: weilycoder/ds/group.hpp
-    title: Group Definitions
+  _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -17,26 +14,7 @@ data:
     links: []
   bundledCode: "#line 1 \"weilycoder/ds/static_range_sum.hpp\"\n\n\n\n/**\n * @file\
     \ static_range_sum.hpp\n * @brief Static Range Sum using Prefix Sums\n */\n\n\
-    #line 1 \"weilycoder/ds/group.hpp\"\n\n\n\n/**\n * @file group.hpp\n * @brief\
-    \ Group Definitions\n */\n\n#include <limits>\n\nnamespace weilycoder {\n/**\n\
-    \ * @brief Additive Group\n * @tparam T Type of the elements\n */\ntemplate <typename\
-    \ T> struct AddGroup {\n  using value_type = T;\n  static constexpr T operation(const\
-    \ T &a, const T &b) { return a + b; }\n  static constexpr T identity() { return\
-    \ T{}; }\n  static constexpr T inverse(const T &a) { return -a; }\n};\n\n/**\n\
-    \ * @brief Additive Monoid\n * @tparam T Type of the elements\n */\ntemplate <typename\
-    \ T> struct AddMonoid {\n  using value_type = T;\n  static constexpr T operation(const\
-    \ T &a, const T &b) { return a + b; }\n  static constexpr T identity() { return\
-    \ T{}; }\n};\n\n/**\n * @brief Minimum Monoid for numbers\n * @tparam T Type of\
-    \ the elements, must support std::numeric_limits\n */\ntemplate <typename T> struct\
-    \ NumberMinMonoid {\n  using value_type = T;\n  static constexpr T operation(const\
-    \ T &a, const T &b) { return a < b ? a : b; }\n  static constexpr T identity()\
-    \ { return std::numeric_limits<T>::max(); }\n};\n\n/**\n * @brief Maximum Monoid\
-    \ for numbers\n * @tparam T Type of the elements, must support std::numeric_limits\n\
-    \ */\ntemplate <typename T> struct NumberMaxMonoid {\n  using value_type = T;\n\
-    \  static constexpr T operation(const T &a, const T &b) { return a > b ? a : b;\
-    \ }\n  static constexpr T identity() { return std::numeric_limits<T>::min(); }\n\
-    };\n} // namespace weilycoder\n\n\n#line 10 \"weilycoder/ds/static_range_sum.hpp\"\
-    \n#include <cstddef>\n#include <stdexcept>\n#include <vector>\n\nnamespace weilycoder\
+    #include <cstddef>\n#include <stdexcept>\n#include <vector>\n\nnamespace weilycoder\
     \ {\n/**\n * @brief Static Range Sum using Prefix Sums\n * @tparam Group A group\
     \ defining the operation and identity element,\n *                must be associative\
     \ and invertible (i.e. Group).\n */\ntemplate <typename Group> struct StaticRangeSum\
@@ -63,11 +41,11 @@ data:
     \  }\n};\n} // namespace weilycoder\n\n\n"
   code: "#ifndef WEILYCODER_STATIC_RANGE_SUM_HPP\n#define WEILYCODER_STATIC_RANGE_SUM_HPP\n\
     \n/**\n * @file static_range_sum.hpp\n * @brief Static Range Sum using Prefix\
-    \ Sums\n */\n\n#include \"group.hpp\"\n#include <cstddef>\n#include <stdexcept>\n\
-    #include <vector>\n\nnamespace weilycoder {\n/**\n * @brief Static Range Sum using\
-    \ Prefix Sums\n * @tparam Group A group defining the operation and identity element,\n\
-    \ *                must be associative and invertible (i.e. Group).\n */\ntemplate\
-    \ <typename Group> struct StaticRangeSum {\n  using value_type = typename Group::value_type;\n\
+    \ Sums\n */\n\n#include <cstddef>\n#include <stdexcept>\n#include <vector>\n\n\
+    namespace weilycoder {\n/**\n * @brief Static Range Sum using Prefix Sums\n *\
+    \ @tparam Group A group defining the operation and identity element,\n *     \
+    \           must be associative and invertible (i.e. Group).\n */\ntemplate <typename\
+    \ Group> struct StaticRangeSum {\n  using value_type = typename Group::value_type;\n\
     \  using T = value_type;\n\nprivate:\n  std::vector<T> prefix_sum;\n\npublic:\n\
     \  /**\n   * @brief Constructs a StaticRangeSum for n elements initialized to\
     \ the\n   *        identity element\n   * @param n Number of elements\n   */\n\
@@ -88,12 +66,11 @@ data:
     \ l, size_t r) const {\n    if (l > r || r > size())\n      throw std::out_of_range(\"\
     Invalid range for StaticRangeSum query\");\n    return Group::operation(Group::inverse(prefix_sum[l]),\
     \ prefix_sum[r]);\n  }\n};\n} // namespace weilycoder\n\n#endif\n"
-  dependsOn:
-  - weilycoder/ds/group.hpp
+  dependsOn: []
   isVerificationFile: false
   path: weilycoder/ds/static_range_sum.hpp
   requiredBy: []
-  timestamp: '2025-10-31 09:52:58+08:00'
+  timestamp: '2025-11-01 07:16:21+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/static_range_sum.test.cpp

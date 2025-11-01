@@ -20,13 +20,13 @@ data:
   bundledCode: "#line 1 \"test/primality_test.test.cpp\"\n#define PROBLEM \"https://judge.yosupo.jp/problem/primality_test\"\
     \n\n#line 1 \"weilycoder/number-theory/prime.hpp\"\n\n\n\n/**\n * @file prime.hpp\n\
     \ * @brief Prime Number Utilities\n */\n\n#line 1 \"weilycoder/number-theory/modint.hpp\"\
-    \n\n\n\n#include <cstdint>\n\n/**\n * @file modint.hpp\n * @brief Modular Integer\
-    \ Arithmetic Utilities\n */\n\nnamespace weilycoder {\n/**\n * @brief Perform\
-    \ modular multiplication for 64-bit integers.\n * @tparam bit32 If true, won't\
-    \ use 128-bit arithmetic. You should ensure that\n *         all inputs are small\
-    \ enough to avoid overflow (i.e. bit-32).\n * @param a The first multiplicand.\n\
-    \ * @param b The second multiplicand.\n * @param modulus The modulus.\n * @return\
-    \ (a * b) % modulus\n */\ntemplate <bool bit32 = false>\nuint64_t modular_multiply_64(uint64_t\
+    \n\n\n\n/**\n * @file modint.hpp\n * @brief Modular Integer Arithmetic Utilities\n\
+    \ */\n\n#include <cstdint>\n\nnamespace weilycoder {\n/**\n * @brief Perform modular\
+    \ multiplication for 64-bit integers.\n * @tparam bit32 If true, won't use 128-bit\
+    \ arithmetic. You should ensure that\n *         all inputs are small enough to\
+    \ avoid overflow (i.e. bit-32).\n * @param a The first multiplicand.\n * @param\
+    \ b The second multiplicand.\n * @param modulus The modulus.\n * @return (a *\
+    \ b) % modulus\n */\ntemplate <bool bit32 = false>\nuint64_t modular_multiply_64(uint64_t\
     \ a, uint64_t b, uint64_t modulus) {\n  if constexpr (bit32)\n    return a * b\
     \ % modulus;\n  else\n    return static_cast<unsigned __int128>(a) * b % modulus;\n\
     }\n\n/**\n * @brief Perform modular exponentiation for 64-bit integers.\n * @tparam\
@@ -99,7 +99,7 @@ data:
   isVerificationFile: true
   path: test/primality_test.test.cpp
   requiredBy: []
-  timestamp: '2025-10-31 09:52:58+08:00'
+  timestamp: '2025-11-01 07:16:21+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/primality_test.test.cpp
