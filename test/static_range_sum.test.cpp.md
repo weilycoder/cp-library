@@ -85,7 +85,7 @@ data:
   isVerificationFile: true
   path: test/static_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2025-11-01 07:16:21+08:00'
+  timestamp: '2025-11-01 13:01:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/static_range_sum.test.cpp

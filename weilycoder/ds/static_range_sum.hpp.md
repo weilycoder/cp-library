@@ -70,7 +70,7 @@ data:
   isVerificationFile: false
   path: weilycoder/ds/static_range_sum.hpp
   requiredBy: []
-  timestamp: '2025-11-01 07:16:21+08:00'
+  timestamp: '2025-11-01 13:01:38+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/static_range_sum.test.cpp

@@ -14,7 +14,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
     links:
     - https://judge.yosupo.jp/problem/point_set_range_composite
-  bundledCode: "#line 1 \"test/point_set_range_composite.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"test/point_set_range_composite2.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/point_set_range_composite\"\n\n#line 1 \"\
     weilycoder/ds/segment_tree.hpp\"\n\n\n\n/**\n * @file segment_tree.hpp\n * @brief\
     \ Segment Tree Data Structure\n */\n\n#include <cstddef>\n#include <limits>\n\
@@ -121,8 +121,8 @@ data:
     \ of bounds\");\n    return range_query(0, get_st(), get_ed(), left, right);\n\
     \  }\n\n  ptr_t get_st() const { return SegmentBase::get_st(); }\n  ptr_t get_ed()\
     \ const { return SegmentBase::get_ed(); }\n};\n} // namespace weilycoder\n\n\n\
-    #line 4 \"test/point_set_range_composite.test.cpp\"\n#include <cstdint>\n#include\
-    \ <iostream>\n#line 7 \"test/point_set_range_composite.test.cpp\"\nusing namespace\
+    #line 4 \"test/point_set_range_composite2.test.cpp\"\n#include <cstdint>\n#include\
+    \ <iostream>\n#line 7 \"test/point_set_range_composite2.test.cpp\"\nusing namespace\
     \ std;\nusing namespace weilycoder;\n\nstatic constexpr uint64_t mod = 998244353;\n\
     \nstruct AffineMonoid {\n  using value_type = pair<uint64_t, uint64_t>; // (a,\
     \ b) represents f(x) = a * x + b\n\n  static value_type identity() { return {1,\
@@ -133,7 +133,7 @@ data:
     \  cin.exceptions(cin.badbit | cin.failbit);\n  size_t n, q;\n  cin >> n >> q;\n\
     \n  vector<pair<uint64_t, uint64_t>> affines;\n  affines.reserve(n);\n  for (size_t\
     \ i = 0; i < n; ++i) {\n    uint64_t a, b;\n    cin >> a >> b;\n    affines.emplace_back(a,\
-    \ b);\n  }\n\n  SegmentTree<SegmentTreeHeapSon<AffineMonoid>> sgt(affines);\n\
+    \ b);\n  }\n\n  SegmentTree<SegmentTreeStoreSon<AffineMonoid>> sgt(affines);\n\
     \  while (q--) {\n    size_t op;\n    cin >> op;\n    if (op == 0) {\n      size_t\
     \ p;\n      uint64_t c, d;\n      cin >> p >> c >> d;\n      sgt.point_set(p,\
     \ {c, d});\n    } else {\n      size_t l, r;\n      uint64_t x;\n      cin >>\
@@ -152,7 +152,7 @@ data:
     \ | cin.failbit);\n  size_t n, q;\n  cin >> n >> q;\n\n  vector<pair<uint64_t,\
     \ uint64_t>> affines;\n  affines.reserve(n);\n  for (size_t i = 0; i < n; ++i)\
     \ {\n    uint64_t a, b;\n    cin >> a >> b;\n    affines.emplace_back(a, b);\n\
-    \  }\n\n  SegmentTree<SegmentTreeHeapSon<AffineMonoid>> sgt(affines);\n  while\
+    \  }\n\n  SegmentTree<SegmentTreeStoreSon<AffineMonoid>> sgt(affines);\n  while\
     \ (q--) {\n    size_t op;\n    cin >> op;\n    if (op == 0) {\n      size_t p;\n\
     \      uint64_t c, d;\n      cin >> p >> c >> d;\n      sgt.point_set(p, {c, d});\n\
     \    } else {\n      size_t l, r;\n      uint64_t x;\n      cin >> l >> r >> x;\n\
@@ -161,15 +161,15 @@ data:
   dependsOn:
   - weilycoder/ds/segment_tree.hpp
   isVerificationFile: true
-  path: test/point_set_range_composite.test.cpp
+  path: test/point_set_range_composite2.test.cpp
   requiredBy: []
   timestamp: '2025-11-01 13:01:38+08:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/point_set_range_composite.test.cpp
+documentation_of: test/point_set_range_composite2.test.cpp
 layout: document
 redirect_from:
-- /verify/test/point_set_range_composite.test.cpp
-- /verify/test/point_set_range_composite.test.cpp.html
-title: test/point_set_range_composite.test.cpp
+- /verify/test/point_set_range_composite2.test.cpp
+- /verify/test/point_set_range_composite2.test.cpp.html
+title: test/point_set_range_composite2.test.cpp
 ---

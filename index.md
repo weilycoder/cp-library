@@ -61,6 +61,9 @@ data:
       path: test/point_set_range_composite.test.cpp
       title: test/point_set_range_composite.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/point_set_range_composite2.test.cpp
+      title: test/point_set_range_composite2.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/primality_test.test.cpp
       title: test/primality_test.test.cpp
     - icon: ':heavy_check_mark:'
