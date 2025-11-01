@@ -36,7 +36,7 @@ int main() {
     affines.emplace_back(a, b);
   }
 
-  SegmentTree<AffineMonoid> sgt(affines);
+  SegmentTree<SegmentTreeStoreSon<AffineMonoid>> sgt(affines);
   while (q--) {
     size_t op;
     cin >> op;
