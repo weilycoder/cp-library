@@ -1,13 +1,14 @@
 {
-"test/aplusb.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/biconnected_components.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/many_aplusb.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/many_aplusb_128bit.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/point_add_range_sum.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/primality_test.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/static_range_sum.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/staticrmq.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/strongly_connected_components.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/two_edge_connected_components.test.cpp": "2025-10-31 09:52:58 +0800",
-"test/unionfind.test.cpp": "2025-10-31 09:52:58 +0800"
+"test/aplusb.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/biconnected_components.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/many_aplusb.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/many_aplusb_128bit.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/point_add_range_sum.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/point_set_range_composite.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/primality_test.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/static_range_sum.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/staticrmq.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/strongly_connected_components.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/two_edge_connected_components.test.cpp": "2025-11-01 07:16:21 +0800",
+"test/unionfind.test.cpp": "2025-11-01 07:16:21 +0800"
 }
