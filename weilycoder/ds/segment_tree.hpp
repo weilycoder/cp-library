@@ -12,6 +12,11 @@
 #include <vector>
 
 namespace weilycoder {
+/**
+ * @brief Segment Tree Base Class that uses heap indexing for child nodes
+ * @tparam _Monoid The monoid defining the operation and identity
+ * @tparam _ptr_t The pointer type used for indexing nodes (default: size_t)
+ */
 template <typename _Monoid, typename _ptr_t = size_t> struct SegmentTreeHeapSon {
 protected:
   using T = typename _Monoid::value_type;
