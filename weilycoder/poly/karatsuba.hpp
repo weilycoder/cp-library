@@ -7,6 +7,17 @@
 #include <vector>
 
 namespace weilycoder {
+/**
+ * @brief Multiply two polynomials using the Karatsuba algorithm.
+ * @tparam InputIt Iterator type for input polynomials.
+ * @tparam OutputIt Iterator type for output polynomial.
+ * @tparam Threshold Size threshold to switch to standard multiplication.
+ * @param a_begin Iterator to the beginning of the first polynomial.
+ * @param a_end Iterator to the end of the first polynomial.
+ * @param b_begin Iterator to the beginning of the second polynomial.
+ * @param b_end Iterator to the end of the second polynomial.
+ * @param result_begin Iterator to the beginning of the result polynomial.
+ */
 template <typename InputIt, typename OutputIt, size_t Threshold = 32>
 void karatsuba_multiply(InputIt a_begin, InputIt a_end, InputIt b_begin, InputIt b_end,
                         OutputIt result_begin) {
@@ -90,10 +101,21 @@ void karatsuba_multiply(InputIt a_begin, InputIt a_end, InputIt b_begin, InputIt
   }
 }
 
-template <typename T>
+/**
+ * @brief Multiply two polynomials using the Karatsuba algorithm.
+ * @tparam T Coefficient type of the polynomials.
+ * @tparam Threshold Size threshold to switch to standard multiplication.
+ * @param a First polynomial coefficients.
+ * @param b Second polynomial coefficients.
+ * @return Resulting polynomial coefficients after multiplication.
+ */
+template <typename T, size_t Threshold = 32>
 std::vector<T> karatsuba_multiply(const std::vector<T> &a, const std::vector<T> &b) {
+  using I_It = typename std::vector<T>::const_iterator;
+  using O_It = typename std::vector<T>::iterator;
   std::vector<T> result(a.size() + b.size() - 1);
-  karatsuba_multiply(a.begin(), a.end(), b.begin(), b.end(), result.begin());
+  karatsuba_multiply<I_It, O_It, Threshold>(a.begin(), a.end(), b.begin(), b.end(),
+                                            result.begin());
   return result;
 }
 } // namespace weilycoder
