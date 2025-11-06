@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_NUMBER_THEORY_FACTORIZE_HPP
 #define WEILYCODER_NUMBER_THEORY_FACTORIZE_HPP
 
+/**
+ * @file factorize.hpp
+ * @brief Functions for factorizing numbers using Pollard's Rho algorithm
+ */
+
 #include "mod_utility.hpp"
 #include "prime.hpp"
 #include <algorithm>
@@ -12,6 +17,13 @@
 #include <vector>
 
 namespace weilycoder {
+/**
+ * @brief Pollard's Rho algorithm to find a non-trivial factor of x
+ * @tparam bit32 Whether to use 32-bit modular multiplication
+ * @param x The number to factorize
+ * @param c The constant in the polynomial x^2 + c
+ * @return A non-trivial factor of x
+ */
 template <bool bit32 = false> constexpr uint64_t pollard_rho(uint64_t x, uint64_t c) {
   if (x % 2 == 0)
     return 2;
@@ -38,6 +50,12 @@ template <bool bit32 = false> constexpr uint64_t pollard_rho(uint64_t x, uint64_
   return x;
 }
 
+/**
+ * @brief Pollard's Rho algorithm to find a non-trivial factor of x
+ * @tparam bit32 Whether to use 32-bit modular multiplication
+ * @param x The number to factorize
+ * @return A non-trivial factor of x
+ */
 template <bool bit32 = false> uint64_t pollard_rho(uint64_t x) {
   static std::minstd_rand rng{};
   if (x % 2 == 0)
@@ -46,6 +64,12 @@ template <bool bit32 = false> uint64_t pollard_rho(uint64_t x) {
   return pollard_rho<bit32>(x, c);
 }
 
+/**
+ * @brief Factorize a number into its prime factors
+ * @tparam bit32 Whether to use 32-bit modular multiplication
+ * @param x The number to factorize
+ * @return A vector of prime factors of x
+ */
 template <bool bit32 = false> std::vector<uint64_t> factorize(uint64_t x) {
   std::vector<uint64_t> factors;
   std::vector<std::pair<uint64_t, size_t>> stk;
@@ -73,6 +97,13 @@ template <bool bit32 = false> std::vector<uint64_t> factorize(uint64_t x) {
   return factors;
 }
 
+/**
+ * @brief Factorize a number into its prime factors with fixed-size array
+ * @tparam N The size of the output array
+ * @tparam bit32 Whether to use 32-bit modular multiplication
+ * @param x The number to factorize
+ * @return An array of prime factors of x
+ */
 template <size_t N = 64, bool bit32 = false>
 constexpr std::array<uint64_t, N> factorize_fixed(uint64_t x) {
   size_t factor_idx = 0, stk_idx = 0;
