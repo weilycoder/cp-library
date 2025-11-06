@@ -1,9 +1,9 @@
-#ifndef WEILYCODER_MODINT_HPP
-#define WEILYCODER_MODINT_HPP
+#ifndef WEILYCODER_MOD_UTILITY_HPP
+#define WEILYCODER_MOD_UTILITY_HPP
 
 /**
- * @file modint.hpp
- * @brief Modular Integer Arithmetic Utilities
+ * @file mod_utility.hpp
+ * @brief Modular Arithmetic Utilities
  */
 
 #include <cstdint>
@@ -27,6 +27,24 @@ uint64_t modular_multiply_64(uint64_t a, uint64_t b, uint64_t modulus) {
 }
 
 /**
+ * @brief Perform modular multiplication for 64-bit integers with a compile-time
+ *        modulus.
+ * @tparam Modulus The modulus.
+ * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
+ *         all inputs are small enough to avoid overflow (i.e. bit-32).
+ * @param a The first multiplicand.
+ * @param b The second multiplicand.
+ * @return (a * b) % Modulus
+ */
+template <uint64_t Modulus, bool bit32 = false>
+uint64_t modular_multiply_64(uint64_t a, uint64_t b) {
+  if constexpr (bit32)
+    return a * b % Modulus;
+  else
+    return static_cast<unsigned __int128>(a) * b % Modulus;
+}
+
+/**
  * @brief Perform modular exponentiation for 64-bit integers.
  * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
  *         all inputs are small enough to avoid overflow (i.e. bit-32).
@@ -47,6 +65,6 @@ constexpr uint64_t fast_power_64(uint64_t base, uint64_t exponent, uint64_t modu
   }
   return result;
 }
-} // namespace weilycoder
+}
 
 #endif

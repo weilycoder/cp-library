@@ -14,10 +14,7 @@ int main() {
   while (q--) {
     uint64_t n;
     cin >> n;
-    if (n <= UINT32_MAX)
-      cout << (miller_rabin32(n) ? "Yes\n" : "No\n");
-    else
-      cout << (miller_rabin64(n) ? "Yes\n" : "No\n");
+    cout << (is_prime(n) ? "Yes\n" : "No\n");
   }
   return 0;
 }

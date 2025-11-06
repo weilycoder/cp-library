@@ -6,7 +6,7 @@
  * @brief Prime Number Utilities
  */
 
-#include "modint.hpp"
+#include "mod_utility.hpp"
 #include <cstdint>
 #include <type_traits>
 
@@ -94,6 +94,12 @@ constexpr bool miller_rabin64(uint64_t n) {
  * @return true if n is prime, false if not prime.
  */
 constexpr bool miller_rabin32(uint32_t n) { return miller_rabin<true, 2, 7, 61>(n); }
+
+constexpr bool is_prime(uint64_t n) {
+  if (n <= UINT32_MAX)
+    return miller_rabin32(static_cast<uint32_t>(n));
+  return miller_rabin64(n);
+}
 } // namespace weilycoder
 
 #endif
