@@ -62,12 +62,16 @@ bool is_primitive_root(uint64_t g, uint64_t p, const std::vector<uint64_t> &fact
  * @param p The prime modulus
  * @return A primitive root modulo p, or 0 if p is not prime
  */
-template <bool bit32 = false> constexpr uint64_t prime_primitive_root(uint64_t p) {
+template <bool bit32 = false, size_t N = 64>
+constexpr uint64_t prime_primitive_root(uint64_t p) {
   if (p == 2)
     return 1;
   if (!is_prime(p))
     return 0;
-  auto factors = factorize_fixed<64, bit32>(p - 1);
+  auto factors = factorize_fixed<N, bit32>(p - 1);
+  auto factor_end = std::unique(factors.begin(), factors.end());
+  if (factor_end != factors.end())
+    *factor_end = 0;
   for (uint64_t g = 2; g < p; ++g)
     if (is_primitive_root<64, bit32>(g, p, factors))
       return g;
