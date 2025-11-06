@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_NUMBER_THEORY_PRIMITIVE_ROOT_HPP
 #define WEILYCODER_NUMBER_THEORY_PRIMITIVE_ROOT_HPP
 
+/**
+ * @file primitive_root.hpp
+ * @brief Functions to find primitive roots modulo a prime
+ */
+
 #include "factorize.hpp"
 #include "mod_utility.hpp"
 #include <array>
