@@ -148,6 +148,27 @@ constexpr uint64_t mod_pow(uint64_t base, uint64_t exponent, uint64_t modulus) {
   }
   return result;
 }
+
+/**
+ * @brief Perform modular exponentiation for 64-bit integers with a compile-time
+ *        modulus.
+ * @tparam Modulus The modulus.
+ * @param base The base number.
+ * @param exponent The exponent.
+ * @return (base^exponent) % Modulus
+ */
+template <uint64_t Modulus>
+constexpr uint64_t mod_pow(uint64_t base, uint64_t exponent) {
+  uint64_t result = 1 % Modulus;
+  base %= Modulus;
+  while (exponent > 0) {
+    if (exponent & 1)
+      result = mod_mul<Modulus>(result, base);
+    base = mod_mul<Modulus>(base, base);
+    exponent >>= 1;
+  }
+  return result;
+}
 } // namespace weilycoder
 
 #endif
