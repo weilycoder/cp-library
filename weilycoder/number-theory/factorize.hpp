@@ -6,6 +6,7 @@
  * @brief Functions for factorizing numbers using Pollard's Rho algorithm
  */
 
+#include "../const_rand.hpp"
 #include "mod_utility.hpp"
 #include "prime.hpp"
 #include <algorithm>
@@ -27,6 +28,7 @@ namespace weilycoder {
 template <bool bit32 = false> constexpr uint64_t pollard_rho(uint64_t x, uint64_t c) {
   if (x % 2 == 0)
     return 2;
+  c = c % (x - 1) + 1;
   uint32_t step = 0, goal = 1;
   uint64_t s = 0, t = 0;
   uint64_t value = 1;
@@ -57,11 +59,10 @@ template <bool bit32 = false> constexpr uint64_t pollard_rho(uint64_t x, uint64_
  * @return A non-trivial factor of x
  */
 template <bool bit32 = false> uint64_t pollard_rho(uint64_t x) {
-  static std::minstd_rand rng{};
   if (x % 2 == 0)
     return 2;
-  uint64_t c = rng() % (x - 1) + 1;
-  return pollard_rho<bit32>(x, c);
+  static std::minstd_rand rng{};
+  return pollard_rho<bit32>(x, rng());
 }
 
 /**
@@ -106,30 +107,41 @@ template <bool bit32 = false> std::vector<uint64_t> factorize(uint64_t x) {
  */
 template <size_t N = 64, bool bit32 = false>
 constexpr std::array<uint64_t, N> factorize_fixed(uint64_t x) {
+  uint32_t random_state = 1;
   size_t factor_idx = 0, stk_idx = 0;
   std::array<uint64_t, N> factors{};
-  std::array<std::pair<uint64_t, size_t>, 64> stk{};
-  stk[stk_idx++] = {x, 1};
+  std::array<uint64_t, 64> stk_val{};
+  std::array<size_t, 64> stk_cnt{};
+  stk_val[stk_idx] = x, stk_cnt[stk_idx++] = 1;
   while (stk_idx > 0) {
-    auto [cur, cnt] = stk[--stk_idx];
+    uint64_t cur = stk_val[--stk_idx];
+    size_t cnt = stk_cnt[stk_idx];
     if (cur == 1)
       continue;
-    if (is_prime(cur))
-      std::fill(factors.begin() + factor_idx, factors.begin() + factor_idx + cnt, cur),
-          factor_idx += cnt;
-    else {
+    if (is_prime(cur)) {
+      for (size_t i = 0; i < cnt; ++i)
+        factors[factor_idx++] = cur;
+    } else {
       uint64_t factor = cur;
       do
-        factor = pollard_rho<bit32>(cur);
+        factor = pollard_rho<bit32>(cur, lcg_nr(random_state));
       while (factor == cur);
       size_t factor_count = 0;
       while (cur % factor == 0)
         cur /= factor, ++factor_count;
-      stk[stk_idx++] = {cur, cnt};
-      stk[stk_idx++] = {factor, factor_count * cnt};
+      stk_val[stk_idx] = cur, stk_cnt[stk_idx++] = cnt;
+      stk_val[stk_idx] = factor, stk_cnt[stk_idx++] = factor_count * cnt;
     }
   }
-  std::sort(factors.begin(), factors.begin() + factor_idx);
+  for (size_t i = 1; i < factor_idx; ++i) {
+    uint64_t key = factors[i];
+    size_t j = i;
+    while (j > 0 && factors[j - 1] > key) {
+      factors[j] = factors[j - 1];
+      --j;
+    }
+    factors[j] = key;
+  }
   return factors;
 }
 } // namespace weilycoder
