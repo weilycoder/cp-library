@@ -29,7 +29,8 @@ std::vector<std::complex<float_t>> fft_convolve(std::vector<std::complex<float_t
   fft(a), fft(b);
   for (size_t i = 0; i < n; ++i)
     a[i] *= b[i];
-  return fft<-1>(a), a;
+  fft<-1>(a), a.resize(a.size() + b.size() - 1);
+  return a;
 }
 
 /**
