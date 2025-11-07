@@ -24,9 +24,9 @@ template <uint32_t mod, uint32_t mod1, uint32_t mod2, uint32_t mod3,
           uint32_t root2 = prime_primitive_root<mod2>(),
           uint32_t root3 = prime_primitive_root<mod3>()>
 std::vector<uint32_t> mtt3_convolve(std::vector<uint64_t> a, std::vector<uint64_t> b) {
-  auto c1 = ntt_convolve_32<mod1, root1>(a, b);
-  auto c2 = ntt_convolve_32<mod2, root2>(a, b);
-  auto c3 = ntt_convolve_32<mod3, root3>(a, b);
+  auto c1 = ntt_convolve<mod1, root1>(a, b);
+  auto c2 = ntt_convolve<mod2, root2>(a, b);
+  auto c3 = ntt_convolve<mod3, root3>(a, b);
 
   size_t n = c1.size();
   std::vector<uint32_t> c(n);

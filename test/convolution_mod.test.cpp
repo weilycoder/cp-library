@@ -16,7 +16,7 @@ int main() {
     cin >> a[i];
   for (size_t i = 0; i < m; ++i)
     cin >> b[i];
-  auto c = ntt_convolve_32<998244353>(a, b);
+  auto c = ntt_convolve<998244353>(a, b);
   for (size_t i = 0; i < n + m - 1; ++i)
     cout << c[i] << " \n"[i + 1 == n + m - 1];
   return 0;

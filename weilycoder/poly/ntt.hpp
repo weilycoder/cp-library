@@ -16,9 +16,10 @@ namespace weilycoder {
  * @tparam root A primitive root modulo mod
  * @param y The input/output vector to be transformed
  */
-template <uint64_t mod, bool inverse = false, bool bit32 = false,
+template <uint64_t mod, bool inverse = false,
           uint64_t root = prime_primitive_root<mod>()>
 void ntt(std::vector<uint64_t> &y) {
+  constexpr bool bit32 = (mod < (1ULL << 32));
   static_assert(is_prime(mod), "mod must be a prime");
   fft_change(y);
   size_t len = y.size();
@@ -46,18 +47,6 @@ void ntt(std::vector<uint64_t> &y) {
     for (size_t i = 0; i < len; ++i)
       y[i] = mod_mul<bit32>(y[i], inv_len, mod);
   }
-}
-
-/**
- * @brief Number Theoretic Transform (NTT) using 32-bit modular multiplication
- * @tparam mod The prime modulus
- * @tparam inverse Whether to perform the inverse NTT
- * @tparam root A primitive root modulo mod
- * @param y The input/output vector to be transformed
- */
-template <uint64_t mod, bool inverse = false, uint64_t root = prime_primitive_root(mod)>
-void ntt_32(std::vector<uint64_t> &y) {
-  ntt<mod, inverse, true, root>(y);
 }
 } // namespace weilycoder
 
