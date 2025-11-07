@@ -32,11 +32,11 @@ template <bool bit32 = false> constexpr uint64_t pollard_rho(uint64_t x, uint64_
   uint64_t value = 1;
   for (;; goal <<= 1, s = t, value = 1) {
     for (step = 1; step <= goal; ++step) {
-      t = modular_multiply_64<bit32>(t, t, x) + c;
+      t = mod_mul<bit32>(t, t, x) + c;
       if (t >= x)
         t -= x;
       uint64_t diff = (s >= t ? s - t : t - s);
-      value = modular_multiply_64<bit32>(value, diff, x);
+      value = mod_mul<bit32>(value, diff, x);
       if (step % 127 == 0) {
         uint64_t d = std::gcd(value, x);
         if (d > 1)

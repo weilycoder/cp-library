@@ -29,7 +29,7 @@ constexpr bool is_primitive_root(uint64_t g, uint64_t p,
     uint64_t q = factors[i];
     if (q == 0)
       break;
-    if (fast_power_64<bit32>(g, (p - 1) / q, p) == 1)
+    if (mod_pow<bit32>(g, (p - 1) / q, p) == 1)
       return false;
   }
   return true;
@@ -50,7 +50,7 @@ bool is_primitive_root(uint64_t g, uint64_t p, const std::vector<uint64_t> &fact
     uint64_t q = factors[i];
     if (q == 0)
       break;
-    if (fast_power_64<bit32>(g, (p - 1) / q, p) == 1)
+    if (mod_pow<bit32>(g, (p - 1) / q, p) == 1)
       return false;
   }
   return true;

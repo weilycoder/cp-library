@@ -9,6 +9,34 @@
 #include <cstdint>
 
 namespace weilycoder {
+using u128 = unsigned __int128;
+
+template <bool bit32 = false>
+uint64_t mod_add(uint64_t a, uint64_t b, uint64_t modulus) {
+  if constexpr (bit32) {
+    uint64_t res = a + b;
+    if (res >= modulus)
+      res -= modulus;
+    return res;
+  } else {
+    u128 res = static_cast<u128>(a) + b;
+    if (res >= modulus)
+      res -= modulus;
+    return res;
+  }
+}
+
+template <bool bit32 = false>
+uint64_t mod_sub(uint64_t a, uint64_t b, uint64_t modulus) {
+  if constexpr (bit32) {
+    uint64_t res = (a >= b) ? (a - b) : (modulus + a - b);
+    return res;
+  } else {
+    u128 res = (a >= b) ? (a - b) : (static_cast<u128>(modulus) + a - b);
+    return res;
+  }
+}
+
 /**
  * @brief Perform modular multiplication for 64-bit integers.
  * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
@@ -19,11 +47,11 @@ namespace weilycoder {
  * @return (a * b) % modulus
  */
 template <bool bit32 = false>
-uint64_t modular_multiply_64(uint64_t a, uint64_t b, uint64_t modulus) {
+uint64_t mod_mul(uint64_t a, uint64_t b, uint64_t modulus) {
   if constexpr (bit32)
     return a * b % modulus;
   else
-    return static_cast<unsigned __int128>(a) * b % modulus;
+    return static_cast<u128>(a) * b % modulus;
 }
 
 /**
@@ -37,11 +65,11 @@ uint64_t modular_multiply_64(uint64_t a, uint64_t b, uint64_t modulus) {
  * @return (a * b) % Modulus
  */
 template <uint64_t Modulus, bool bit32 = false>
-uint64_t modular_multiply_64(uint64_t a, uint64_t b) {
+uint64_t mod_mul(uint64_t a, uint64_t b) {
   if constexpr (bit32)
     return a * b % Modulus;
   else
-    return static_cast<unsigned __int128>(a) * b % Modulus;
+    return static_cast<u128>(a) * b % Modulus;
 }
 
 /**
@@ -54,17 +82,17 @@ uint64_t modular_multiply_64(uint64_t a, uint64_t b) {
  * @return (base^exponent) % modulus
  */
 template <bool bit32 = false>
-constexpr uint64_t fast_power_64(uint64_t base, uint64_t exponent, uint64_t modulus) {
+constexpr uint64_t mod_pow(uint64_t base, uint64_t exponent, uint64_t modulus) {
   uint64_t result = 1 % modulus;
   base %= modulus;
   while (exponent > 0) {
     if (exponent & 1)
-      result = modular_multiply_64<bit32>(result, base, modulus);
-    base = modular_multiply_64<bit32>(base, base, modulus);
+      result = mod_mul<bit32>(result, base, modulus);
+    base = mod_mul<bit32>(base, base, modulus);
     exponent >>= 1;
   }
   return result;
 }
-}
+} // namespace weilycoder
 
 #endif

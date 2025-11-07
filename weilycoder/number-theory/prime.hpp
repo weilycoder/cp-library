@@ -23,11 +23,11 @@ namespace weilycoder {
  */
 template <bool bit32, uint64_t base>
 constexpr bool miller_rabin_test(uint64_t n, uint64_t d, uint32_t s) {
-  uint64_t x = fast_power_64<bit32>(base, d, n);
+  uint64_t x = mod_pow<bit32>(base, d, n);
   if (x == 0 || x == 1 || x == n - 1)
     return true;
   for (uint32_t r = 1; r < s; ++r) {
-    x = modular_multiply_64<bit32>(x, x, n);
+    x = mod_mul<bit32>(x, x, n);
     if (x == n - 1)
       return true;
   }
