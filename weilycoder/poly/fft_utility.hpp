@@ -38,7 +38,7 @@ template <typename T> void fft_change(std::vector<T> &a) {
     if (i & 1)
       rev[i] |= n >> 1;
     if (i < rev[i])
-      swap(a[i], a[rev[i]]);
+      std::swap(a[i], a[rev[i]]);
   }
 }
 } // namespace weilycoder
