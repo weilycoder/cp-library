@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/factorize"
 
-#include "../weilycoder/number-theory/factorize.hpp"
+#include "../weilycoder/number_theory/factorize.hpp"
 #include <iostream>
 using namespace std;
 using namespace weilycoder;

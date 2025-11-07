@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/primality_test"
 
-#include "../weilycoder/number-theory/prime.hpp"
+#include "../weilycoder/number_theory/prime.hpp"
 #include <cstdint>
 #include <iostream>
 using namespace std;

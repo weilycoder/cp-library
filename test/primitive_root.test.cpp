@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/primitive_root"
 
-#include "../weilycoder/number-theory/primitive_root.hpp"
+#include "../weilycoder/number_theory/primitive_root.hpp"
 #include <iostream>
 using namespace std;
 using namespace weilycoder;

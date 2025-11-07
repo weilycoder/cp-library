@@ -1,8 +1,8 @@
 #ifndef WEILYCODER_POLY_NTT_HPP
 #define WEILYCODER_POLY_NTT_HPP
 
-#include "../number-theory/mod_utility.hpp"
-#include "../number-theory/primitive_root.hpp"
+#include "../number_theory/mod_utility.hpp"
+#include "../number_theory/primitive_root.hpp"
 #include "fft_utility.hpp"
 #include <cstdint>
 #include <vector>
