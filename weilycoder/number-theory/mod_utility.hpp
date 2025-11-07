@@ -76,15 +76,12 @@ constexpr uint64_t mod_mul(uint64_t a, uint64_t b, uint64_t modulus) {
  * @brief Perform modular multiplication for 64-bit integers with a compile-time
  *        modulus.
  * @tparam Modulus The modulus.
- * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
- *         all inputs are small enough to avoid overflow (i.e. bit-32).
  * @param a The first multiplicand.
  * @param b The second multiplicand.
  * @return (a * b) % Modulus
  */
-template <uint64_t Modulus, bool bit32 = false>
-constexpr uint64_t mod_mul(uint64_t a, uint64_t b) {
-  if constexpr (bit32)
+template <uint64_t Modulus> constexpr uint64_t mod_mul(uint64_t a, uint64_t b) {
+  if constexpr (Modulus <= UINT32_MAX)
     return a * b % Modulus;
   else
     return static_cast<u128>(a) * b % Modulus;
