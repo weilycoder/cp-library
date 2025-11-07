@@ -4,6 +4,7 @@
 #include "fft_utility.hpp"
 #include <complex>
 #include <cstddef>
+#include <stdexcept>
 #include <vector>
 
 /**
@@ -23,9 +24,12 @@ template <int32_t on = 1, typename float_t = double>
 void fft(std::vector<std::complex<float_t>> &y) {
   static_assert(on == 1 || on == -1, "on must be 1 or -1");
   fft_change(y);
-  for (size_t h = 2; h <= y.size(); h <<= 1) {
+  size_t len = y.size();
+  if (len == 0 || (len & (len - 1)) != 0)
+    throw std::invalid_argument("Length of input vector must be a power of two");
+  for (size_t h = 2; h <= len; h <<= 1) {
     std::complex<float_t> wn(cos(2 * PI<float_t> / h), sin(on * 2 * PI<float_t> / h));
-    for (size_t j = 0; j < y.size(); j += h) {
+    for (size_t j = 0; j < len; j += h) {
       std::complex<float_t> w(1, 0);
       for (size_t k = j; k < j + (h >> 1); ++k, w *= wn) {
         std::complex<float_t> u = y[k], t = w * y[k + (h >> 1)];
@@ -33,7 +37,6 @@ void fft(std::vector<std::complex<float_t>> &y) {
       }
     }
   }
-  size_t len = y.size();
   if constexpr (on == -1)
     for (size_t i = 0; i < len; ++i)
       y[i] /= len;
