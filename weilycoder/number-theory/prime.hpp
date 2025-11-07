@@ -100,6 +100,13 @@ constexpr bool is_prime(uint64_t n) {
     return miller_rabin32(static_cast<uint32_t>(n));
   return miller_rabin64(n);
 }
+
+/**
+ * @brief Compile-time primality test for a given integer.
+ * @tparam x The integer to test for primality.
+ * @return true if x is prime, false otherwise.
+ */
+template <uint64_t x> constexpr bool is_prime() { return is_prime(x); }
 } // namespace weilycoder
 
 #endif
