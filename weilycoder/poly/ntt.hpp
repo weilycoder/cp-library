@@ -7,6 +7,11 @@
 #include <cstdint>
 #include <vector>
 
+/**
+ * @file ntt.hpp
+ * @brief Number Theoretic Transform (NTT) implementation
+ */
+
 namespace weilycoder {
 /**
  * @brief Number Theoretic Transform (NTT)
