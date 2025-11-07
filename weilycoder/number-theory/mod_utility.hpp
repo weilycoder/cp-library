@@ -169,6 +169,28 @@ constexpr uint64_t mod_pow(uint64_t base, uint64_t exponent) {
   }
   return result;
 }
+
+/**
+ * @brief Compute the modular inverse of a 64-bit integer using Fermat's Little
+ *        Theorem.
+ * @tparam Modulus The modulus (must be prime).
+ * @param a The number to find the modular inverse of.
+ * @return The modular inverse of a modulo Modulus.
+ */
+template <uint64_t Modulus> constexpr uint64_t mod_inv(uint64_t a) {
+  return mod_pow<Modulus>(a, Modulus - 2);
+}
+
+/**
+ * @brief Compute the modular inverse of a compile-time 64-bit integer using
+ *        Fermat's Little Theorem.
+ * @tparam Modulus The modulus (must be prime).
+ * @tparam a The number to find the modular inverse of.
+ * @return The modular inverse of a modulo Modulus.
+ */
+template <uint64_t Modulus, uint64_t a> constexpr uint64_t mod_inv() {
+  return mod_pow<Modulus>(a, Modulus - 2);
+}
 } // namespace weilycoder
 
 #endif
