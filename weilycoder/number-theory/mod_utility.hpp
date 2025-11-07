@@ -12,7 +12,7 @@ namespace weilycoder {
 using u128 = unsigned __int128;
 
 template <bool bit32 = false>
-uint64_t mod_add(uint64_t a, uint64_t b, uint64_t modulus) {
+constexpr uint64_t mod_add(uint64_t a, uint64_t b, uint64_t modulus) {
   if constexpr (bit32) {
     uint64_t res = a + b;
     if (res >= modulus)
@@ -27,7 +27,7 @@ uint64_t mod_add(uint64_t a, uint64_t b, uint64_t modulus) {
 }
 
 template <bool bit32 = false>
-uint64_t mod_sub(uint64_t a, uint64_t b, uint64_t modulus) {
+constexpr uint64_t mod_sub(uint64_t a, uint64_t b, uint64_t modulus) {
   if constexpr (bit32) {
     uint64_t res = (a >= b) ? (a - b) : (modulus + a - b);
     return res;
@@ -47,7 +47,7 @@ uint64_t mod_sub(uint64_t a, uint64_t b, uint64_t modulus) {
  * @return (a * b) % modulus
  */
 template <bool bit32 = false>
-uint64_t mod_mul(uint64_t a, uint64_t b, uint64_t modulus) {
+constexpr uint64_t mod_mul(uint64_t a, uint64_t b, uint64_t modulus) {
   if constexpr (bit32)
     return a * b % modulus;
   else
@@ -65,7 +65,7 @@ uint64_t mod_mul(uint64_t a, uint64_t b, uint64_t modulus) {
  * @return (a * b) % Modulus
  */
 template <uint64_t Modulus, bool bit32 = false>
-uint64_t mod_mul(uint64_t a, uint64_t b) {
+constexpr uint64_t mod_mul(uint64_t a, uint64_t b) {
   if constexpr (bit32)
     return a * b % Modulus;
   else
