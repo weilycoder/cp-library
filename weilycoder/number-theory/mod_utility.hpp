@@ -11,6 +11,15 @@
 namespace weilycoder {
 using u128 = unsigned __int128;
 
+/**
+ * @brief Perform modular addition for 64-bit integers.
+ * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
+ *         all inputs are small enough to avoid overflow (i.e. bit-32).
+ * @param a The first addend.
+ * @param b The second addend.
+ * @param modulus The modulus.
+ * @return (a + b) % modulus
+ */
 template <bool bit32 = false>
 constexpr uint64_t mod_add(uint64_t a, uint64_t b, uint64_t modulus) {
   if constexpr (bit32) {
@@ -26,6 +35,15 @@ constexpr uint64_t mod_add(uint64_t a, uint64_t b, uint64_t modulus) {
   }
 }
 
+/**
+ * @brief Perform modular subtraction for 64-bit integers.
+ * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
+ *         all inputs are small enough to avoid overflow (i.e. bit-32).
+ * @param a The minuend.
+ * @param b The subtrahend.
+ * @param modulus The modulus.
+ * @return (a - b) % modulus
+ */
 template <bool bit32 = false>
 constexpr uint64_t mod_sub(uint64_t a, uint64_t b, uint64_t modulus) {
   if constexpr (bit32) {
