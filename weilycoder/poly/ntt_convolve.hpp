@@ -6,7 +6,7 @@
 
 /**
  * @file ntt_convolve.hpp
- * @brief Convolving sequences using Number Theoretic Transform (NTT)
+ * @brief Multiplying polynomials using Number Theoretic Transform (NTT)
  */
 
 namespace weilycoder {

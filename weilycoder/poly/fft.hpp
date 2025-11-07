@@ -9,7 +9,7 @@
 
 /**
  * @file fft.hpp
- * @brief Implementation of Fast Fourier Transform (FFT) and its inverse.
+ * @brief Fast Fourier Transform (FFT) implementation
  */
 
 namespace weilycoder {

@@ -8,7 +8,7 @@
 
 /**
  * @file fft_convolve.hpp
- * @brief Functions for performing convolution using Fast Fourier Transform (FFT).  
+ * @brief Multiplying polynomials using Fast Fourier Transform (FFT)
  */
 
 namespace weilycoder {
