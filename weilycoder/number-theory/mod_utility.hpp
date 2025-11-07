@@ -36,6 +36,28 @@ constexpr uint64_t mod_add(uint64_t a, uint64_t b, uint64_t modulus) {
 }
 
 /**
+ * @brief Perform modular addition for 64-bit integers with a compile-time
+ *        modulus.
+ * @tparam Modulus The modulus.
+ * @param a The first addend.
+ * @param b The second addend.
+ * @return (a + b) % Modulus
+ */
+template <uint64_t Modulus> constexpr uint64_t mod_add(uint64_t a, uint64_t b) {
+  if constexpr (Modulus <= UINT32_MAX) {
+    uint64_t res = a + b;
+    if (res >= Modulus)
+      res -= Modulus;
+    return res;
+  } else {
+    u128 res = static_cast<u128>(a) + b;
+    if (res >= Modulus)
+      res -= Modulus;
+    return res;
+  }
+}
+
+/**
  * @brief Perform modular subtraction for 64-bit integers.
  * @tparam bit32 If true, won't use 128-bit arithmetic. You should ensure that
  *         all inputs are small enough to avoid overflow (i.e. bit-32).
@@ -51,6 +73,24 @@ constexpr uint64_t mod_sub(uint64_t a, uint64_t b, uint64_t modulus) {
     return res;
   } else {
     u128 res = (a >= b) ? (a - b) : (static_cast<u128>(modulus) + a - b);
+    return res;
+  }
+}
+
+/**
+ * @brief Perform modular subtraction for 64-bit integers with a compile-time
+ *        modulus.
+ * @tparam Modulus The modulus.
+ * @param a The minuend.
+ * @param b The subtrahend.
+ * @return (a - b) % Modulus
+ */
+template <uint64_t Modulus> constexpr uint64_t mod_sub(uint64_t a, uint64_t b) {
+  if constexpr (Modulus <= UINT32_MAX) {
+    uint64_t res = (a >= b) ? (a - b) : (Modulus + a - b);
+    return res;
+  } else {
+    u128 res = (a >= b) ? (a - b) : (static_cast<u128>(Modulus) + a - b);
     return res;
   }
 }
