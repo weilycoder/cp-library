@@ -12,7 +12,6 @@ namespace weilycoder {
  * @brief Number Theoretic Transform (NTT)
  * @tparam mod The prime modulus
  * @tparam inverse Whether to perform the inverse NTT
- * @tparam bit32 Whether to use 32-bit modular multiplication
  * @tparam root A primitive root modulo mod
  * @param y The input/output vector to be transformed
  */
