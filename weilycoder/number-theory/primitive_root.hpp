@@ -69,13 +69,32 @@ constexpr uint64_t prime_primitive_root(uint64_t p) {
   if (!is_prime(p))
     return 0;
   auto factors = factorize_fixed<N, bit32>(p - 1);
-  auto factor_end = std::unique(factors.begin(), factors.end());
-  if (factor_end != factors.end())
-    *factor_end = 0;
+  auto factors_set = std::array<uint64_t, N>{};
+  size_t factor_count = 0;
+  for (size_t i = 0; i < N; ++i) {
+    uint64_t q = factors[i];
+    if (q == 0)
+      break;
+    if (i == 0 || q != factors[i - 1])
+      factors_set[factor_count++] = q;
+  }
   for (uint64_t g = 2; g < p; ++g)
-    if (is_primitive_root<64, bit32>(g, p, factors))
+    if (is_primitive_root<N, bit32>(g, p, factors_set))
       return g;
   return 0;
+}
+
+/**
+ * @brief Find a primitive root modulo a prime (compile-time version)
+ * @tparam prime The prime modulus
+ * @return A primitive root modulo prime.
+ */
+template <uint64_t prime> constexpr uint64_t prime_primitive_root() {
+  if constexpr (prime == 2)
+    return 1;
+  if (prime < UINT32_MAX)
+    return prime_primitive_root<true, 32>(prime);
+  return prime_primitive_root<false, 64>(prime);
 }
 } // namespace weilycoder
 
