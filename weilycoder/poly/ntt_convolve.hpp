@@ -21,8 +21,8 @@ namespace weilycoder {
 template <uint64_t mod, uint64_t root = prime_primitive_root<mod>()>
 std::vector<uint64_t> ntt_convolve(std::vector<uint64_t> a, std::vector<uint64_t> b) {
   constexpr bool bit32 = (mod < (1ULL << 32));
-  size_t n = 1;
-  while (n < a.size() + b.size() - 1)
+  size_t n = 1, target = a.size() + b.size() - 1;
+  while (n < target)
     n <<= 1;
   a.resize(n, 0);
   b.resize(n, 0);
@@ -31,7 +31,7 @@ std::vector<uint64_t> ntt_convolve(std::vector<uint64_t> a, std::vector<uint64_t
   for (size_t i = 0; i < n; ++i)
     a[i] = mod_mul<bit32>(a[i], b[i], mod);
   ntt<mod, true, root>(a);
-  a.resize(a.size() + b.size() - 1);
+  a.resize(target);
   return a;
 }
 } // namespace weilycoder

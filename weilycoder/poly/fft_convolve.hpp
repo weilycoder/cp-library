@@ -22,14 +22,14 @@ namespace weilycoder {
 template <typename float_t = double>
 std::vector<std::complex<float_t>> fft_convolve(std::vector<std::complex<float_t>> a,
                                                 std::vector<std::complex<float_t>> b) {
-  size_t n = 1;
-  while (n < a.size() + b.size() - 1)
+  size_t n = 1, target = a.size() + b.size() - 1;
+  while (n < target)
     n <<= 1;
   a.resize(n), b.resize(n);
   fft(a), fft(b);
   for (size_t i = 0; i < n; ++i)
     a[i] *= b[i];
-  fft<-1>(a), a.resize(a.size() + b.size() - 1);
+  fft<-1>(a), a.resize(target);
   return a;
 }
 
