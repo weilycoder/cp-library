@@ -20,9 +20,9 @@ namespace weilycoder {
  * @param multiply Function to multiply two polynomials.
  * @return Coefficients of the resulting polynomial after multiplication.
  */
-template <typename T, typename MultiplyFunc>
+template <typename T, typename PolyMultiplyFunc>
 std::vector<T> poly_mul(const std::vector<T> &a, const std::vector<T> &b,
-                        MultiplyFunc multiply) {
+                        PolyMultiplyFunc multiply) {
   return multiply(a, b);
 }
 
@@ -38,9 +38,9 @@ std::vector<T> poly_mul(const std::vector<T> &a, const std::vector<T> &b,
  * @return Coefficients of the resulting polynomial after multiplication,
  *         limited to degree n-1.
  */
-template <typename T, typename MultiplyFunc>
+template <typename T, typename PolyMultiplyFunc>
 std::vector<T> poly_mul(const std::vector<T> &a, const std::vector<T> &b, size_t n,
-                        MultiplyFunc multiply) {
+                        PolyMultiplyFunc multiply) {
   auto res = multiply(std::vector<T>(a.begin(), min(a.begin() + n, a.end())),
                       std::vector<T>(b.begin(), min(b.begin() + n, b.end())));
   res.resize(n);

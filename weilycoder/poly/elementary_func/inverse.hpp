@@ -26,9 +26,9 @@ namespace weilycoder {
  * @param number_inv Function to compute the multiplicative inverse of a coefficient.
  * @return Coefficients of the inverse polynomial modulo x^n.
  */
-template <typename T, typename MultiplyFunc, typename SubtractFunc,
+template <typename T, typename PolyMultiplyFunc, typename SubtractFunc,
           typename InverseFunc>
-std::vector<T> poly_inv(const std::vector<T> &a, size_t n, MultiplyFunc multiply,
+std::vector<T> poly_inv(const std::vector<T> &a, size_t n, PolyMultiplyFunc multiply,
                         SubtractFunc number_sub, InverseFunc number_inv) {
   if (a.empty() || a[0] == T(0))
     throw std::invalid_argument("Constant term must be non-zero for inversion.");
