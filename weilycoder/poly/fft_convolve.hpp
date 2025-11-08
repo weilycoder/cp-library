@@ -22,6 +22,8 @@ namespace weilycoder {
 template <typename float_t = double>
 std::vector<std::complex<float_t>> fft_convolve(std::vector<std::complex<float_t>> a,
                                                 std::vector<std::complex<float_t>> b) {
+  if (a.empty() || b.empty())
+    return {};
   size_t n = 1, target = a.size() + b.size() - 1;
   while (n < target)
     n <<= 1;
