@@ -18,7 +18,7 @@ int main() {
   for (auto &x : b)
     cin >> x;
 
-  auto c = mtt3_convolve<1000000007, 167772161, 469762049, 754974721>(a, b);
+  auto c = mtt3_convolve<1000000007>(a, b);
   for (size_t i = 0; i < n + m - 1; ++i)
     cout << c[i] << " \n"[i + 1 == n + m - 1];
   return 0;

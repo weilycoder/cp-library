@@ -19,8 +19,8 @@ namespace weilycoder {
  * @return Coefficients of the resulting polynomial after multiplication under modulo
  *         `mod`.
  */
-template <uint32_t mod, uint32_t mod1, uint32_t mod2, uint32_t mod3,
-          uint32_t root1 = prime_primitive_root<mod1>(),
+template <uint32_t mod, uint32_t mod1 = 167772161u, uint32_t mod2 = 469762049u,
+          uint32_t mod3 = 754974721u, uint32_t root1 = prime_primitive_root<mod1>(),
           uint32_t root2 = prime_primitive_root<mod2>(),
           uint32_t root3 = prime_primitive_root<mod3>()>
 std::vector<uint32_t> mtt3_convolve(std::vector<uint64_t> a, std::vector<uint64_t> b) {
