@@ -233,6 +233,44 @@ public:
   }
 
   /**
+   * @brief Get the k-th node in the treap (0-indexed).
+   * @param p The root of the treap.
+   * @param k The index of the node to get.
+   * @return The index of the found node, or `null` if not found.
+   */
+  size_t get_by_size(size_t p, size_t k) const {
+    if (p == null || k >= node_size(p))
+      return null;
+    if (node_size(nodes[p].left) == k)
+      return p;
+    else if (node_size(nodes[p].left) > k)
+      return get_by_size(nodes[p].left, k);
+    else
+      return get_by_size(nodes[p].right, k - node_size(nodes[p].left) - 1);
+  }
+
+  /**
+   * @brief Get the first node with a value not less than the given value.
+   * @tparam Compare The comparison functor type (default is `std::less<T>`).
+   * @param p The root of the treap.
+   * @param value The value to search for.
+   * @return The index of the found node, or `null` if not found.
+   * @note If the treap has not maintained sorted order, the result is undefined.
+   */
+  template <typename Compare = std::less<T>>
+  size_t get_by_value(size_t p, const T &value) const {
+    if (p == null)
+      return null;
+    constexpr Compare less;
+    if (less(nodes[p].value, value))
+      return get_by_value(nodes[p].right, value);
+    else {
+      size_t res = get_by_value(nodes[p].left, value);
+      return res == null ? p : res;
+    }
+  }
+
+  /**
    * @brief Merge two treaps into one.
    * @param left The root of the left treap.
    * @param right The root of the right treap.
