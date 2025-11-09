@@ -292,6 +292,25 @@ public:
   }
 
   /**
+   * @brief Get the number of elements in the treap less than the given value.
+   * @tparam Compare The comparison functor type (default is `std::less<T>`).
+   * @param p The root of the treap.
+   * @param value The value to compare.
+   * @return The number of elements less than the given value.
+   * @note If the treap has not maintained sorted order, the result is undefined.
+   */
+  template <typename Compare = std::less<T>>
+  size_t get_rank(size_t p, const T &value) const {
+    if (p == null)
+      return 0;
+    constexpr Compare less;
+    if (less(nodes[p].value, value))
+      return node_size(nodes[p].left) + 1 + get_rank<Compare>(nodes[p].right, value);
+    else
+      return get_rank<Compare>(nodes[p].left, value);
+  }
+
+  /**
    * @brief Merge two treaps into one.
    * @param left The root of the left treap.
    * @param right The root of the right treap.
