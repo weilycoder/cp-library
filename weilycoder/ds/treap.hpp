@@ -258,14 +258,35 @@ public:
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
   template <typename Compare = std::less<T>>
-  size_t get_by_value(size_t p, const T &value) const {
+  size_t get_greater(size_t p, const T &value) const {
     if (p == null)
       return null;
     constexpr Compare less;
     if (less(nodes[p].value, value))
-      return get_by_value(nodes[p].right, value);
+      return get_greater<Compare>(nodes[p].right, value);
     else {
-      size_t res = get_by_value(nodes[p].left, value);
+      size_t res = get_greater<Compare>(nodes[p].left, value);
+      return res == null ? p : res;
+    }
+  }
+
+  /**
+   * @brief Get the last node with a value not greater than the given value.
+   * @tparam Compare The comparison functor type (default is `std::less<T>`).
+   * @param p The root of the treap.
+   * @param value The value to search for.
+   * @return The index of the found node, or `null` if not found.
+   * @note If the treap has not maintained sorted order, the result is undefined.
+   */
+  template <typename Compare = std::less<T>>
+  size_t get_less(size_t p, const T &value) const {
+    if (p == null)
+      return null;
+    constexpr Compare less;
+    if (less(value, nodes[p].value))
+      return get_less<Compare>(nodes[p].left, value);
+    else {
+      size_t res = get_less<Compare>(nodes[p].right, value);
       return res == null ? p : res;
     }
   }
