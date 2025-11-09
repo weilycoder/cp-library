@@ -37,7 +37,7 @@ std::vector<T> integrate(const std::vector<T> &poly, MultiplyFunc number_mul,
  */
 template <uint64_t mod>
 std::vector<uint64_t> ntt_poly_integrate(const std::vector<uint64_t> &poly) {
-  return integrate<>(poly, mod_inv<mod>);
+  return integrate<>(poly, mod_mul<mod>, mod_inv<mod>);
 }
 } // namespace weilycoder
 
