@@ -370,10 +370,10 @@ public:
     auto [left, mid, right] = value_split<Compare>(root, value);
     if (mid != null) {
       // Value already exists, do not insert
-      return merge(merge(left, mid), right);
+      return {merge(merge(left, mid), right), false};
     }
     size_t newnode = new_node(value);
-    return merge(merge(left, newnode), right);
+    return {merge(merge(left, newnode), right), true};
   }
 
   /**
