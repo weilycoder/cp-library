@@ -2,7 +2,7 @@
 #define WEILYCODER_CONST_RAND_HPP
 
 /**
- * @file const_rand.hpp
+ * @file random.hpp
  * @brief Lightweight Compile-Time Pseudo-Random Number Generators
  */
 

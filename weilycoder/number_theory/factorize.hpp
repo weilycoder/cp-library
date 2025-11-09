@@ -6,7 +6,7 @@
  * @brief Functions for factorizing numbers using Pollard's Rho algorithm
  */
 
-#include "../const_rand.hpp"
+#include "../random.hpp"
 #include "mod_utility.hpp"
 #include "prime.hpp"
 #include <algorithm>
