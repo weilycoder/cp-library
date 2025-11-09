@@ -147,6 +147,7 @@ public:
    * @param p The root of the treap to split.
    * @param value The value to split the treap by.
    * @return A pair of roots of the left and right treaps.
+   * @note If the treap has not maintained sorted order, the result is undefined.
    */
   template <typename Compare = std::less<T>>
   std::pair<size_t, size_t> lower_split(size_t p, const T &value) {
@@ -174,6 +175,7 @@ public:
    * @param p The root of the treap to split.
    * @param value The value to split the treap by.
    * @return A pair of roots of the left and right treaps.
+   * @note If the treap has not maintained sorted order, the result is undefined.
    */
   template <typename Compare = std::less<T>>
   std::pair<size_t, size_t> upper_split(size_t p, const T &value) {
@@ -202,6 +204,7 @@ public:
    * @param p The root of the treap to split.
    * @param value The value to split the treap by.
    * @return A tuple of roots of the left, middle, and right treaps.
+   * @note If the treap has not maintained sorted order, the result is undefined.
    * @note If want to split all equal values into the middle treap,
    *       use `lower_split` and `upper_split` instead.
    */
@@ -261,6 +264,41 @@ public:
   }
 
   /**
+   * @brief Insert a value into the treap while maintaining sorted order.
+   * @tparam Compare The comparison functor type (default is `std::less<T>`).
+   * @param root The root of the treap.
+   * @param value The value to insert.
+   * @return The new root of the treap after insertion.
+   * @note If the treap has not maintained sorted order, the result is undefined.
+   */
+  template <typename Compare = std::less<T>>
+  size_t insert(size_t root, const T &value) {
+    auto [left, right] = lower_split<Compare>(root, value);
+    size_t newnode = new_node(value);
+    return merge(merge(left, newnode), right);
+  }
+
+  /**
+   * @brief Insert a unique value into the treap while maintaining sorted order.
+   * @tparam Compare The comparison functor type (default is `std::less<T>`).
+   * @param root The root of the treap.
+   * @param value The value to insert.
+   * @return A pair containing the new root of the treap after insertion
+   *         and a boolean indicating whether the insertion took place.
+   * @note If the treap has not maintained sorted order, the result is undefined.
+   */
+  template <typename Compare = std::less<T>>
+  std::pair<size_t, bool> insert_unique(size_t root, const T &value) {
+    auto [left, mid, right] = value_split<Compare>(root, value);
+    if (mid != null) {
+      // Value already exists, do not insert
+      return merge(merge(left, mid), right);
+    }
+    size_t newnode = new_node(value);
+    return merge(merge(left, newnode), right);
+  }
+
+  /**
    * @brief Erase the node at a given position in the treap.
    * @param root The root of the treap.
    * @param pos The position of the node to erase.
@@ -270,6 +308,51 @@ public:
     auto [left, mid, right] = size_split3(root, pos);
     free_list.push_back(mid);
     return merge(left, right);
+  }
+
+  /**
+   * @brief Erase a value from the treap while maintaining sorted order.
+   * @tparam Compare The comparison functor type (default is `std::less<T>`).
+   * @param root The root of the treap.
+   * @param value The value to erase.
+   * @return The new root of the treap after erasure.
+   * @note If the treap has not maintained sorted order, the result is undefined.
+   */
+  template <typename Compare = std::less<T>>
+  size_t erase_value(size_t root, const T &value) {
+    auto [left, mid, right] = value_split<Compare>(root, value);
+    if (mid != null)
+      free_list.push_back(mid);
+    return merge(left, right);
+  }
+
+  /**
+   * @brief Erase all occurrences of a value from the treap while maintaining sorted
+   *        order.
+   * @tparam Compare The comparison functor type (default is `std::less<T>`).
+   * @param root The root of the treap.
+   * @param value The value to erase.
+   * @return The new root of the treap after erasure.
+   * @note If the treap has not maintained sorted order, the result is undefined.
+   */
+  template <typename Compare = std::less<T>>
+  size_t erase_value_all(size_t root, const T &value) {
+    auto [left, right] = lower_split<Compare>(root, value);
+    auto [mid, rright] = upper_split<Compare>(right, value);
+    erase_treap(mid);
+    return merge(left, rright);
+  }
+
+  /**
+   * @brief Recursively erase all nodes in the treap rooted at p.
+   * @param p The root of the treap.
+   */
+  void erase_treap(size_t p) {
+    if (p != null) {
+      erase_treap(nodes[p].left);
+      erase_treap(nodes[p].right);
+      free_list.push_back(p);
+    }
   }
 
   /**
