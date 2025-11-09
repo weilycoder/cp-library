@@ -1,6 +1,11 @@
 #ifndef WEILYCODER_CONST_RAND_HPP
 #define WEILYCODER_CONST_RAND_HPP
 
+/**
+ * @file const_rand.hpp
+ * @brief Lightweight Compile-Time Pseudo-Random Number Generators
+ */
+
 #include <cstdint>
 
 namespace weilycoder {
