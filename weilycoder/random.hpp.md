@@ -4,7 +4,7 @@ data:
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: weilycoder/ds/treap.hpp
-    title: Reserve space for n nodes in the treap.
+    title: Treap Data Structure
   - icon: ':heavy_check_mark:'
     path: weilycoder/number_theory/factorize.hpp
     title: Functions for factorizing numbers using Pollard's Rho algorithm

@@ -20,7 +20,7 @@ data:
       title: Static Range Sum using Prefix Sums
     - icon: ':heavy_check_mark:'
       path: weilycoder/ds/treap.hpp
-      title: Reserve space for n nodes in the treap.
+      title: Treap Data Structure
     - icon: ':heavy_check_mark:'
       path: weilycoder/ds/unionfind.hpp
       title: Union-Find (Disjoint Set Union) Data Structure
