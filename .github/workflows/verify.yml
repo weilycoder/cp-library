@@ -27,4 +27,4 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_PAT: ${{ secrets.GH_PAT }}
-      run: oj-verify all -j 2
+      run: oj-verify all -j 2 --timeout 3600
