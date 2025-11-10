@@ -1,6 +1,11 @@
 #ifndef WEILY_CODER_DS_TREAP_HPP
 #define WEILY_CODER_DS_TREAP_HPP
 
+/**
+ * @file treap.hpp
+ * @brief Treap Data Structure
+ */
+
 #include "../random.hpp"
 #include <functional>
 #include <limits>
@@ -9,6 +14,9 @@
 #include <vector>
 
 namespace weilycoder {
+/**
+ * @brief Base class for Treap data structure, providing random priority generation.
+ */
 struct treap_base {
 private:
   static inline uint32_t rand32 = 0;
@@ -26,8 +34,7 @@ private:
     T value;
     uint32_t priority;
     size_t size, left, right;
-    node(const T &value)
-        : value(value), priority(get_rand()), size(1u), left(null), right(null) {}
+    node(const T &value) : value(value), priority(get_rand()), size(1u), left(null), right(null) {}
   };
 
   std::vector<size_t> free_list;
@@ -149,8 +156,7 @@ public:
    * @return A pair of roots of the left and right treaps.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  std::pair<size_t, size_t> lower_split(size_t p, const T &value) {
+  template <typename Compare = std::less<T>> std::pair<size_t, size_t> lower_split(size_t p, const T &value) {
     constexpr Compare less;
     if (p == null)
       return {null, null};
@@ -177,8 +183,7 @@ public:
    * @return A pair of roots of the left and right treaps.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  std::pair<size_t, size_t> upper_split(size_t p, const T &value) {
+  template <typename Compare = std::less<T>> std::pair<size_t, size_t> upper_split(size_t p, const T &value) {
     constexpr Compare less;
     if (p == null)
       return {null, null};
@@ -208,8 +213,7 @@ public:
    * @note If want to split all equal values into the middle treap,
    *       use `lower_split` and `upper_split` instead.
    */
-  template <typename Compare = std::less<T>>
-  std::tuple<size_t, size_t, size_t> value_split(size_t p, const T &value) {
+  template <typename Compare = std::less<T>> std::tuple<size_t, size_t, size_t> value_split(size_t p, const T &value) {
     constexpr Compare less;
     if (p == null)
       return {null, null, null};
@@ -257,8 +261,7 @@ public:
    * @return The index of the found node, or `null` if not found.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  size_t get_greater(size_t p, const T &value) const {
+  template <typename Compare = std::less<T>> size_t get_greater(size_t p, const T &value) const {
     if (p == null)
       return null;
     constexpr Compare less;
@@ -278,8 +281,7 @@ public:
    * @return The index of the found node, or `null` if not found.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  size_t get_less(size_t p, const T &value) const {
+  template <typename Compare = std::less<T>> size_t get_less(size_t p, const T &value) const {
     if (p == null)
       return null;
     constexpr Compare less;
@@ -299,8 +301,7 @@ public:
    * @return The number of elements less than the given value.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  size_t get_rank(size_t p, const T &value) const {
+  template <typename Compare = std::less<T>> size_t get_rank(size_t p, const T &value) const {
     if (p == null)
       return 0;
     constexpr Compare less;
@@ -349,8 +350,7 @@ public:
    * @return The new root of the treap after insertion.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  size_t insert(size_t root, const T &value) {
+  template <typename Compare = std::less<T>> size_t insert(size_t root, const T &value) {
     auto [left, right] = lower_split<Compare>(root, value);
     size_t newnode = new_node(value);
     return merge(merge(left, newnode), right);
@@ -365,8 +365,7 @@ public:
    *         and a boolean indicating whether the insertion took place.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  std::pair<size_t, bool> insert_unique(size_t root, const T &value) {
+  template <typename Compare = std::less<T>> std::pair<size_t, bool> insert_unique(size_t root, const T &value) {
     auto [left, mid, right] = value_split<Compare>(root, value);
     if (mid != null) {
       // Value already exists, do not insert
@@ -396,8 +395,7 @@ public:
    * @return The new root of the treap after erasure.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  size_t erase_value(size_t root, const T &value) {
+  template <typename Compare = std::less<T>> size_t erase_value(size_t root, const T &value) {
     auto [left, mid, right] = value_split<Compare>(root, value);
     if (mid != null)
       free_list.push_back(mid);
@@ -413,8 +411,7 @@ public:
    * @return The new root of the treap after erasure.
    * @note If the treap has not maintained sorted order, the result is undefined.
    */
-  template <typename Compare = std::less<T>>
-  size_t erase_value_all(size_t root, const T &value) {
+  template <typename Compare = std::less<T>> size_t erase_value_all(size_t root, const T &value) {
     auto [left, right] = lower_split<Compare>(root, value);
     auto [mid, rright] = upper_split<Compare>(right, value);
     erase_treap(mid);
