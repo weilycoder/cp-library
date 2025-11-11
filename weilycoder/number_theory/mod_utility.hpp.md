@@ -6,6 +6,9 @@ data:
     path: weilycoder/number_theory/factorize.hpp
     title: Functions for factorizing numbers using Pollard's Rho algorithm
   - icon: ':heavy_check_mark:'
+    path: weilycoder/number_theory/modint.hpp
+    title: Modular Integer Class
+  - icon: ':heavy_check_mark:'
     path: weilycoder/number_theory/prime.hpp
     title: Prime Number Utilities
   - icon: ':heavy_check_mark:'
@@ -117,6 +120,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/log_of_formal_power_series.test.cpp
     title: test/log_of_formal_power_series.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/matrix_product.test.cpp
+    title: test/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/primality_test.test.cpp
     title: test/primality_test.test.cpp
@@ -304,6 +310,7 @@ data:
   - weilycoder/number_theory/factorize.hpp
   - weilycoder/number_theory/primitive_root.hpp
   - weilycoder/number_theory/prime.hpp
+  - weilycoder/number_theory/modint.hpp
   timestamp: '2025-11-08 07:03:41+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -323,6 +330,7 @@ data:
   - test/inv_of_formal_power_series.test.cpp
   - test/inv_of_formal_power_series.test.cpp
   - test/inv_of_formal_power_series.test.cpp
+  - test/matrix_product.test.cpp
   - test/factorize.test.cpp
 documentation_of: weilycoder/number_theory/mod_utility.hpp
 layout: document

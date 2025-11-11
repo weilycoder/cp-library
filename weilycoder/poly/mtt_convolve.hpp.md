@@ -334,11 +334,11 @@ data:
     \ <uint32_t mod, uint32_t mod1 = 167772161u, uint32_t mod2 = 469762049u,\n   \
     \       uint32_t mod3 = 754974721u, uint32_t root1 = prime_primitive_root<mod1>(),\n\
     \          uint32_t root2 = prime_primitive_root<mod2>(),\n          uint32_t\
-    \ root3 = prime_primitive_root<mod3>()>\nstd::vector<uint32_t> mtt3_convolve(std::vector<uint64_t>\
+    \ root3 = prime_primitive_root<mod3>()>\nstd::vector<uint64_t> mtt3_convolve(std::vector<uint64_t>\
     \ a, std::vector<uint64_t> b) {\n  if (a.empty() || b.empty())\n    return {};\n\
     \n  auto c1 = ntt_convolve<mod1, root1>(a, b);\n  auto c2 = ntt_convolve<mod2,\
     \ root2>(a, b);\n  auto c3 = ntt_convolve<mod3, root3>(a, b);\n\n  size_t n =\
-    \ c1.size();\n  std::vector<uint32_t> c(n);\n\n  constexpr uint64_t MOD = static_cast<uint64_t>(mod1)\
+    \ c1.size();\n  std::vector<uint64_t> c(n);\n\n  constexpr uint64_t MOD = static_cast<uint64_t>(mod1)\
     \ * mod2;\n  constexpr uint64_t inv1 = mod_inv<mod2>(mod1);\n  constexpr uint64_t\
     \ inv2 = mod_inv<mod3>(mod_mul<mod3>(mod1, mod2));\n\n  auto excrt = [&](uint64_t\
     \ c1, uint64_t c2, uint64_t c3) -> uint32_t {\n    uint64_t R = mod_sub<mod2>(c2,\
@@ -360,11 +360,11 @@ data:
     \ modulo\n *         `mod`.\n */\ntemplate <uint32_t mod, uint32_t mod1 = 167772161u,\
     \ uint32_t mod2 = 469762049u,\n          uint32_t mod3 = 754974721u, uint32_t\
     \ root1 = prime_primitive_root<mod1>(),\n          uint32_t root2 = prime_primitive_root<mod2>(),\n\
-    \          uint32_t root3 = prime_primitive_root<mod3>()>\nstd::vector<uint32_t>\
+    \          uint32_t root3 = prime_primitive_root<mod3>()>\nstd::vector<uint64_t>\
     \ mtt3_convolve(std::vector<uint64_t> a, std::vector<uint64_t> b) {\n  if (a.empty()\
     \ || b.empty())\n    return {};\n\n  auto c1 = ntt_convolve<mod1, root1>(a, b);\n\
     \  auto c2 = ntt_convolve<mod2, root2>(a, b);\n  auto c3 = ntt_convolve<mod3,\
-    \ root3>(a, b);\n\n  size_t n = c1.size();\n  std::vector<uint32_t> c(n);\n\n\
+    \ root3>(a, b);\n\n  size_t n = c1.size();\n  std::vector<uint64_t> c(n);\n\n\
     \  constexpr uint64_t MOD = static_cast<uint64_t>(mod1) * mod2;\n  constexpr uint64_t\
     \ inv1 = mod_inv<mod2>(mod1);\n  constexpr uint64_t inv2 = mod_inv<mod3>(mod_mul<mod3>(mod1,\
     \ mod2));\n\n  auto excrt = [&](uint64_t c1, uint64_t c2, uint64_t c3) -> uint32_t\
@@ -387,7 +387,7 @@ data:
   isVerificationFile: false
   path: weilycoder/poly/mtt_convolve.hpp
   requiredBy: []
-  timestamp: '2025-11-09 18:18:23+08:00'
+  timestamp: '2025-11-11 17:29:06+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/convolution_mod_1000000007.test.cpp

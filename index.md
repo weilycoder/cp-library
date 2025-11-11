@@ -7,6 +7,9 @@ data:
       path: weilycoder/ds/group.hpp
       title: Group Definitions
     - icon: ':heavy_check_mark:'
+      path: weilycoder/ds/narray.hpp
+      title: N-dimensional array (narray)
+    - icon: ':heavy_check_mark:'
       path: weilycoder/ds/offline_static_range_query.hpp
       title: Offline Static Range Query Data Structure
     - icon: ':heavy_check_mark:'
@@ -30,6 +33,9 @@ data:
       path: weilycoder/fast-io.hpp
       title: Fast Input/Output Utilities
     - icon: ':heavy_check_mark:'
+      path: weilycoder/matrix.hpp
+      title: Matrix implementation using narray
+    - icon: ':heavy_check_mark:'
       path: weilycoder/random.hpp
       title: Lightweight Compile-Time Pseudo-Random Number Generators
   - name: weilycoder/graph
@@ -45,6 +51,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: weilycoder/number_theory/mod_utility.hpp
       title: Modular Arithmetic Utilities
+    - icon: ':heavy_check_mark:'
+      path: weilycoder/number_theory/modint.hpp
+      title: Modular Integer Class
     - icon: ':heavy_check_mark:'
       path: weilycoder/number_theory/prime.hpp
       title: Prime Number Utilities
@@ -130,6 +139,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/many_aplusb_128bit.test.cpp
       title: test/many_aplusb_128bit.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/matrix_product.test.cpp
+      title: test/matrix_product.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/multiplication_of_big_integers.fft.test.cpp
       title: test/multiplication_of_big_integers.fft.test.cpp
