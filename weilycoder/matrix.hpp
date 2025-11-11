@@ -143,8 +143,8 @@ template <typename T> struct NMatrix {
     size_t K = data.shape[1];
     NMatrix<T> result(R, C);
     for (size_t i = 0; i < R; ++i)
-      for (size_t j = 0; j < C; ++j)
-        for (size_t k = 0; k < K; ++k)
+      for (size_t k = 0; k < K; ++k)
+        for (size_t j = 0; j < C; ++j)
           result(i, j) += data(i, k) * other(k, j);
     return *this = result;
   }
@@ -177,8 +177,8 @@ template <typename T> struct NMatrix {
     size_t K = a.data.shape[1];
     NMatrix<T> result(R, C);
     for (size_t i = 0; i < R; ++i)
-      for (size_t j = 0; j < C; ++j)
-        for (size_t k = 0; k < K; ++k)
+      for (size_t k = 0; k < K; ++k)
+        for (size_t j = 0; j < C; ++j)
           result(i, j) += a(i, k) * b(k, j);
     return result;
   }
