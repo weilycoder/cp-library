@@ -23,7 +23,7 @@ template <uint32_t mod, uint32_t mod1 = 167772161u, uint32_t mod2 = 469762049u,
           uint32_t mod3 = 754974721u, uint32_t root1 = prime_primitive_root<mod1>(),
           uint32_t root2 = prime_primitive_root<mod2>(),
           uint32_t root3 = prime_primitive_root<mod3>()>
-std::vector<uint32_t> mtt3_convolve(std::vector<uint64_t> a, std::vector<uint64_t> b) {
+std::vector<uint64_t> mtt3_convolve(std::vector<uint64_t> a, std::vector<uint64_t> b) {
   if (a.empty() || b.empty())
     return {};
 
@@ -32,7 +32,7 @@ std::vector<uint32_t> mtt3_convolve(std::vector<uint64_t> a, std::vector<uint64_
   auto c3 = ntt_convolve<mod3, root3>(a, b);
 
   size_t n = c1.size();
-  std::vector<uint32_t> c(n);
+  std::vector<uint64_t> c(n);
 
   constexpr uint64_t MOD = static_cast<uint64_t>(mod1) * mod2;
   constexpr uint64_t inv1 = mod_inv<mod2>(mod1);
