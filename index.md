@@ -4,6 +4,9 @@ data:
   - name: weilycoder/ds
     pages:
     - icon: ':heavy_check_mark:'
+      path: weilycoder/ds/bitset.hpp
+      title: Run-time sized bitset
+    - icon: ':heavy_check_mark:'
       path: weilycoder/ds/group.hpp
       title: Group Definitions
     - icon: ':heavy_check_mark:'
@@ -142,6 +145,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/matrix_product.test.cpp
       title: test/matrix_product.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/matrix_product_mod_2.test.cpp
+      title: test/matrix_product_mod_2.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/multiplication_of_big_integers.fft.test.cpp
       title: test/multiplication_of_big_integers.fft.test.cpp

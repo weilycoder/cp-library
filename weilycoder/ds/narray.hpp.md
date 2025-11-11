@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/matrix_product.test.cpp
     title: test/matrix_product.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/matrix_product_mod_2.test.cpp
+    title: test/matrix_product_mod_2.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -89,6 +92,7 @@ data:
   timestamp: '2025-11-11 19:14:58+08:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/matrix_product_mod_2.test.cpp
   - test/matrix_product.test.cpp
 documentation_of: weilycoder/ds/narray.hpp
 layout: document
