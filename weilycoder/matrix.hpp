@@ -6,9 +6,11 @@
  * @brief Matrix implementation using narray
  */
 
+#include "ds/bitset.hpp"
 #include "ds/narray.hpp"
 #include <cstddef>
 #include <stdexcept>
+#include <vector>
 
 namespace weilycoder {
 template <typename T, size_t R, size_t C> struct Matrix {
@@ -180,6 +182,110 @@ template <typename T> struct NMatrix {
       for (size_t k = 0; k < K; ++k)
         for (size_t j = 0; j < C; ++j)
           result(i, j) += a(i, k) * b(k, j);
+    return result;
+  }
+};
+
+struct BMatrix {
+  size_t rows, cols;
+  std::vector<dbitset> data;
+
+  BMatrix(size_t rows, size_t cols)
+      : rows(rows), cols(cols), data(rows, dbitset(cols)) {}
+
+  /**
+   * @brief Access element at specified row and column.
+   * @param row Row index.
+   * @param col Column index.
+   * @return Reference to the element at the specified row and column.
+   */
+  dbitset::reference operator()(size_t row, size_t col) { return data[row][col]; }
+
+  /**
+   * @brief Access element at specified row and column.
+   * @param row Row index.
+   * @param col Column index.
+   * @return Reference to the element at the specified row and column.
+   */
+  dbitset::const_reference operator()(size_t row, size_t col) const {
+    return data[row][col];
+  }
+
+  BMatrix &operator&=(const BMatrix &other) {
+    for (size_t i = 0; i < rows; ++i)
+      data[i] &= other.data[i];
+    return *this;
+  }
+
+  BMatrix &operator|=(const BMatrix &other) {
+    for (size_t i = 0; i < rows; ++i)
+      data[i] |= other.data[i];
+    return *this;
+  }
+
+  BMatrix &operator^=(const BMatrix &other) {
+    for (size_t i = 0; i < rows; ++i)
+      data[i] ^= other.data[i];
+    return *this;
+  }
+
+  BMatrix operator*=(const BMatrix &other) {
+    if (cols != other.rows)
+      throw std::invalid_argument("Matrix dimensions do not match for multiplication.");
+    BMatrix result(rows, other.cols);
+    for (size_t i = 0; i < rows; ++i)
+      for (size_t k = 0; k < cols; ++k)
+        if (data[i][k])
+          result.data[i] ^= other.data[k];
+    return *this = result;
+  }
+
+  friend BMatrix operator&(const BMatrix &a, const BMatrix &b) {
+    if (a.rows != b.rows || a.cols != b.cols)
+      throw std::invalid_argument("Matrix dimensions do not match for AND operation.");
+    BMatrix result(a.rows, a.cols);
+    for (size_t i = 0; i < a.rows; ++i)
+      for (size_t j = 0; j < a.cols; ++j)
+        result(i, j) = static_cast<bool>(a(i, j)) && static_cast<bool>(b(i, j));
+    return result;
+  }
+
+  friend BMatrix operator|(const BMatrix &a, const BMatrix &b) {
+    if (a.rows != b.rows || a.cols != b.cols)
+      throw std::invalid_argument("Matrix dimensions do not match for OR operation.");
+    BMatrix result(a.rows, a.cols);
+    for (size_t i = 0; i < a.rows; ++i)
+      for (size_t j = 0; j < a.cols; ++j)
+        result(i, j) = static_cast<bool>(a(i, j)) || static_cast<bool>(b(i, j));
+    return result;
+  }
+
+  friend BMatrix operator^(const BMatrix &a, const BMatrix &b) {
+    if (a.rows != b.rows || a.cols != b.cols)
+      throw std::invalid_argument("Matrix dimensions do not match for XOR operation.");
+    BMatrix result(a.rows, a.cols);
+    for (size_t i = 0; i < a.rows; ++i)
+      for (size_t j = 0; j < a.cols; ++j)
+        result(i, j) = static_cast<bool>(a(i, j)) ^ static_cast<bool>(b(i, j));
+    return result;
+  }
+
+  friend BMatrix operator~(const BMatrix &a) {
+    BMatrix result(a.rows, a.cols);
+    for (size_t i = 0; i < a.rows; ++i)
+      for (size_t j = 0; j < a.cols; ++j)
+        result(i, j) = !static_cast<bool>(a(i, j));
+    return result;
+  }
+
+  friend BMatrix operator*(const BMatrix &a, const BMatrix &b) {
+    if (a.cols != b.rows)
+      throw std::invalid_argument("Matrix dimensions do not match for multiplication.");
+    BMatrix result(a.rows, b.cols);
+    for (size_t i = 0; i < a.rows; ++i)
+      for (size_t k = 0; k < a.cols; ++k)
+        if (a(i, k))
+          result.data[i] ^= b.data[k];
     return result;
   }
 };
